@@ -1,0 +1,58 @@
+$primary-color: #007bff;
+$text-color: #333;
+$white: #fff;
+$light-gray-bg: #f4f4f4;
+$border-color: #ccc;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+
+h1{
+    text-align: center;
+}
+
+.register-form {
+    padding: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    .form-group {
+        input[type="text"],
+        input[type="date"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+        }
+    }
+
+    .btn-submit {
+        background-color: $primary-color;
+        color: $white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+        width: 100%;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken($primary-color, 10%);
+        }
+    }
+
+    .login-link {
+        margin-top: 20px;
+        font-size: 15px;
+        color: darken($text-color, 10%);
+
+        a {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: bold;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
