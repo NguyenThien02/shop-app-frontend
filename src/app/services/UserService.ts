@@ -15,6 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   register(registerDTO: RegisterDTO): Observable<any> {
+    debugger
     return this.http.post(this.apiRegister, registerDTO);
   }
 

@@ -9,6 +9,7 @@ import { RegisterComponentComponent } from './components/register/register-compo
 import { HeaderComponent } from './components/header/header.component';
 import { AppComponent } from './app/app.component';
 import { LoginComponent } from './components/login/login.component';
+import { TokenInterceptor } from './interceptors/interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+    providers: [{
+    provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

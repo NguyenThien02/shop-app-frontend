@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,14 +12,14 @@ import { UserService } from 'src/app/services/UserService';
   templateUrl: './register-component.component.html',
   styleUrls: ['./register-component.component.scss']
 })
-export class RegisterComponentComponent {
+export class RegisterComponentComponent implements OnInit{
   phoneNumber: string = "";
   fullName: string = "";
   password: string = "";
   retypePassword: string = "";
   birthday: Date = new Date();
   address: string = "";
-  selectedRole: Role | undefined;
+  selectedRole : Role | undefined
   roles: Role[] = [];
 
   constructor(
@@ -54,7 +54,7 @@ export class RegisterComponentComponent {
       "retype_password": this.password,
       "birthday": this.birthday,
       "address": this.address,
-      "role_id": this.selectedRole?.id ?? 1
+      "role_id": this.selectedRole?.roleId ?? 1
     }
     this.userService.register(registerDTO).subscribe({
       next: (response : any) => {
