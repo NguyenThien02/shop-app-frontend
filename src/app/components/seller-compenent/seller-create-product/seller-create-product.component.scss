@@ -1,0 +1,14 @@
+.container-fluid {
+    display: flex;
+    height: 100vh;
+    
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    background-color: #ecf0f1;
+    border-left: 1px solid #ddd; /* Thay đổi sang border-left nếu bạn muốn tạo khoảng cách bên trái */
+    height: 100vh;
+    overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao viewport */
+}

@@ -5,10 +5,20 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponentComponent } from './components/register/register-component.component';
 import { LoginComponent } from './components/login/login.component';
 
+import { UserHomeComponentComponent } from './components/user-component/user-home-component/user-home-component.component';
+
+import { SellerHomeComponentComponent } from './components/seller-compenent/seller-home-component/seller-home-component.component';
+import { SellerCreateProductComponent } from './components/seller-compenent/seller-create-product/seller-create-product.component';
+
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'register', component: RegisterComponentComponent},
-    {path: 'login', component: LoginComponent}
+    {path: 'login', component: LoginComponent},
+
+    {path: 'user/home', component: UserHomeComponentComponent},
+
+    {path: 'seller/home', component: SellerHomeComponentComponent},
+    {path: 'seller/create-product', component: SellerCreateProductComponent} 
 ]
 
 @NgModule({

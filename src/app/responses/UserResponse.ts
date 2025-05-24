@@ -1,11 +1,12 @@
 import { Role } from "../models/Role";
 
 export interface UserResponse {
-    fullName : string;
-    phoneNumber : string;
+    id : number
+    full_name : string;
+    phone_number : string;
     address : string;
     birthday : Date;
     role : Role;
-    createAt : Date;
-    updateAt : Date;
+    created_at : Date;
+    updated_at : Date;
 }

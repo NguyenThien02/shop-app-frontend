@@ -1,0 +1,28 @@
+<div class="sidebar">
+    <div class="profile">
+        <img src="assets/seller.jpeg" alt="avatar" class="profile-img">
+        <p class="profile-name">{{ userResponse?.full_name }}</p>
+        <p *ngIf="userResponse?.id" class="profile-name">USER ID: {{ userResponse?.id }}</p> 
+    </div>
+    <ul class="menu">
+        <li [class.active]="isActive('home')">
+            <a routerLink="/seller/home">Thông tin người bán</a>
+        </li>
+        <li [class.active]="isActive('update-user')">
+            <a routerLink="/">Chỉnh sửa thông tin</a>
+        </li>
+        
+        <li  [class.active]="isActive('create-product')">
+            <a routerLink="/seller/create-product">Thêm sản phẩm</a>
+        </li>
+        <li  [class.active]="isActive('get-schedule')">
+            <a routerLink="/">Số lượng sản phẩm</a>
+        </li>
+        <li  [class.active]="isActive('get-profile')">
+            <a routerLink="/">Hồ sơ khám bệnh</a>
+        </li>
+        <li class="logout" (click)="confirmLogout()"> 
+            <a href="javascript:void(0)">Đăng xuất</a>
+        </li>
+    </ul>
+</div>

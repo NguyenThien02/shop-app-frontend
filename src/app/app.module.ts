@@ -10,6 +10,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { AppComponent } from './app/app.component';
 import { LoginComponent } from './components/login/login.component';
 import { TokenInterceptor } from './interceptors/interceptor';
+import { UserHomeComponentComponent } from './components/user-component/user-home-component/user-home-component.component';
+
+import { SellerHeaderCompenentComponent } from './components/seller-compenent/seller-header-compenent/seller-header-compenent.component';
+import { SellerHomeComponentComponent } from './components/seller-compenent/seller-home-component/seller-home-component.component';
+import { SellerCreateProductComponent } from './components/seller-compenent/seller-create-product/seller-create-product.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,12 @@ import { TokenInterceptor } from './interceptors/interceptor';
     RegisterComponentComponent,
     HeaderComponent,
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    UserHomeComponentComponent,
+    
+    SellerHeaderCompenentComponent,
+    SellerHomeComponentComponent,
+    SellerCreateProductComponent
   ],
   imports: [
     BrowserModule,

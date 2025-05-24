@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { count } from 'rxjs';
-import { LoginDTO } from 'src/app/dtos/loginDTO';
-import { TokenService } from 'src/app/services/tokenService';
+import { LoginDTO } from 'src/app/dtos/LoginDTO';
+import { LocalStorageService } from 'src/app/services/LocalStorageService';
 import { UserService } from 'src/app/services/UserService';
 
 
@@ -17,8 +17,8 @@ export class LoginComponent {
 
   constructor(
     private userService: UserService,
-    private router : Router,
-    private tokenService : TokenService
+    private router: Router,
+    private localStorageService: LocalStorageService
   ) { }
 
   login() {
@@ -27,16 +27,22 @@ export class LoginComponent {
       "password": this.password
     }
     debugger
+    localStorage.clear();
     this.userService.login(loginDTO).subscribe({
       next: (response: any) => {
         debugger
-        localStorage.clear();
         const token = response.token;
 
-        if(token){
-          this.tokenService.setToken(token);
+        if (token) {
+          this.localStorageService.setToken(token);
+          this.localStorageService.setUserResponseToLocalStorage(response.user_response)
         }
-        this.router.navigate(['/'])
+        if (response.user_response.role.roleId == 1) {
+          this.router.navigate(['/user/home'])
+        }
+        if (response.user_response.role.roleId == 2) {
+          this.router.navigate(['/seller/home'])
+        }
       },
       error: (error: any) => {
         console.error('Error:', error);

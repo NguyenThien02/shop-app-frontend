@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { RegisterDTO } from 'src/app/dtos/registerDTO';
+import { RegisterDTO } from 'src/app/dtos/RegisterDTO';
 import { Role } from 'src/app/models/Role';
 import { RoleService } from 'src/app/services/RoleService';
 import { UserService } from 'src/app/services/UserService';

@@ -9,36 +9,37 @@ import { ProductService } from 'src/app/services/ProductService';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   categoryId: number = 0;
-  productRespons: ProductResponse[] =[];
-  featuredProductRespons : ProductResponse[] = [];
+  productRespons: ProductResponse[] = [];
+  featuredProductRespons: ProductResponse[] = [];
 
   page: number = 0;
   limit: number = 9;
   totalPages: number = 0;
   pages: number[] = [];
 
-  pageFeatured : number = 0;
-  limitFeatured : number = 3;
+  pageFeatured: number = 0;
+  limitFeatured: number = 3;
 
   constructor(
-    private productService : ProductService
-  ){}
+    private productService: ProductService
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.getProductByCategory(this.page, this.limit, this.categoryId);
     this.getFeaturedProduct(this.pageFeatured, this.limitFeatured);
   }
 
-  getProductByCategory(page : number, limit : number, categoryId : number){
+  getProductByCategory(page: number, limit: number, categoryId: number) {
     this.productService.getProductByCategory(page, limit, categoryId).subscribe({
-      next: (response : any) => {
+      next: (response: any) => {
         response.productResponse.forEach((productResponse: ProductResponse) => {
           productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
         });
         this.totalPages = response.totalPages;
         this.productRespons = response.productResponse;
+        this.pages = Array(this.totalPages).fill(0).map((x, i) => i);
       },
       error: (error: any) => {
         console.error('Error:', error);
@@ -46,12 +47,11 @@ export class HomeComponent implements OnInit{
     })
   }
 
-  getFeaturedProduct(pageFeatured : number, limitFeatured : number){
+  getFeaturedProduct(pageFeatured: number, limitFeatured: number) {
     debugger
     this.productService.getFeaturedProduct(pageFeatured, limitFeatured, 0).subscribe({
-      next: (response : any) => {
+      next: (response: any) => {
         debugger
-        // for(ProductResponse featuredProductRespons : response.productResponse )
         response.productResponse.forEach((productResponse: ProductResponse) => {
           productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
         });
@@ -71,5 +71,12 @@ export class HomeComponent implements OnInit{
   prevSlide() {
     this.getFeaturedProduct(this.pageFeatured - 1, this.limitFeatured);
     this.pageFeatured -= 1;
+  }
+
+    changePage(page: number) {
+    if (page >= 0 && page < this.totalPages) {
+      this.page = page;
+      this.getProductByCategory(this.page, this.limit, this.categoryId);
+    }
   }
 }

@@ -10,7 +10,7 @@
     </section>
 
     <div class="collections">
-        <h2></h2>
+        <h2>Sản phẩm nổi bật</h2>
         <p class="description">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
             repellat!
@@ -39,14 +39,20 @@
                             <img [src]="product.image_url" alt="Product Image" class="product-image">
                             <h3 class="product-name">{{product.product_name}}</h3>
                             <p class="product-specialty"> {{product.price}}</p>
-                            <button class="btn btn-primary"
-                                [routerLink]="['/doctor-detail', product.product_id]">Xem Chi tiết</button>
+                            <button class="btn btn-primary" [routerLink]="['/doctor-detail', product.product_id]">Xem
+                                Chi tiết</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <div class="pagination">
+        <button (click)="changePage(page - 1)" [disabled]="page === 0">Previous</button>
+        <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1
+            }}</button>
+        <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Next</button>
+    </div>
 </main>
 
 <footer class="footer">
