@@ -1,287 +1,206 @@
-// Variables
 $primary-color: #007bff;
 $secondary-color: #6c757d;
+$background-color: #f8f9fa;
 $text-color: #333;
-$light-gray: #f8f9fa;
-$white: #fff;
-$font-stack: 'Arial', sans-serif;
 
-// Mixins
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@mixin grid-layout($min-col-width, $gap) {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax($min-col-width, 1fr));
-  gap: $gap;
-}
-
-// Global Styles
 body {
-  font-family: $font-stack;
-  margin: 0;
-  padding: 0;
-  line-height: 1.6;
+  font-family: Arial, sans-serif;
   color: $text-color;
-  background-color: $light-gray;
+  background: $background-color;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-h1, h2, h3 {
-  color: $text-color;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-a {
-  text-decoration: none;
-  color: $primary-color;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
-// Buttons
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  transition: background-color 0.3s ease;
-
-  &-primary {
-    background-color: $primary-color;
-    color: $white;
-    &:hover {
-      background-color: darken($primary-color, 10%);
-      text-decoration: none;
-    }
-  }
-
-  &-secondary {
-    background-color: $secondary-color;
-    color: $white;
-    &:hover {
-      background-color: darken($secondary-color, 10%);
-      text-decoration: none;
-    }
-  }
-
-  &-large {
-    padding: 15px 30px;
-    font-size: 18px;
-  }
-
-  &-add-cart {
-    background-color: #28a745;
-    color: $white;
-    width: 100%;
-    &:hover {
-      background-color: darken(#28a745, 10%);
-    }
-  }
-}
-
-// Main Content
-.main-content {
-  padding: 30px 0;
-}
-
-// Hero Section
 .hero-section {
-  background-color: $primary-color;
-  color: $white;
-  padding: 80px 0;
+  background: linear-gradient(to right, $primary-color, darken($primary-color, 10%));
+  padding: 50px 0;
   text-align: center;
-  margin-bottom: 40px;
 
   h1 {
-    color: $white;
-    font-size: 48px;
+    color: white;
+    font-size: 2.5rem;
+  }
+
+  .subtext {
+    color: white;
+    font-size: 1.2rem;
     margin-bottom: 20px;
   }
-  p {
-    font-size: 20px;
-    margin-bottom: 30px;
-  }
-}
-
-// Categories Section
-.categories-section {
-  margin-bottom: 40px;
-  h2 {
-    margin-bottom: 30px;
-  }
-
-  .category-grid {
-    @include grid-layout(200px, 20px);
-    text-align: center;
-
-    .category-item {
-      background-color: $white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 5px;
-        margin-bottom: 15px;
-      }
-      h3 {
-        font-size: 20px;
-        margin-bottom: 0;
-      }
-    }
-  }
-}
-
-// Products Section
-.products-section {
-  margin-bottom: 40px;
-  h2 {
-    margin-bottom: 30px;
-  }
-
-  .product-grid {
-    @include grid-layout(250px, 20px);
-
-    .product-card {
-      background-color: $white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-
-      img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 5px;
-        margin-bottom: 15px;
-      }
-      h3 {
-        font-size: 22px;
-        margin-bottom: 10px;
-        min-height: 50px; // Ensure consistent height for titles
-      }
-      .price {
-        font-size: 24px;
-        font-weight: bold;
-        color: #dc3545; // Red color for price
-        margin-bottom: 15px;
-      }
-      .btn-add-cart {
-        margin-top: 10px;
-      }
-    }
-  }
-}
-
-
-// Footer
-.footer {
-  background-color: $text-color;
-  color: $white;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 14px;
 }
 
 .collections {
   text-align: center;
   padding: 40px;
+
   h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    color: $primary-color;
   }
-  .description {
-    max-width: 600px;
-    margin: 0 auto 30px;
-    font-size: 14px;
-    color: #666;
-  }
+
   .carousel {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     .nav {
-      background: #f2f2f2;
+      background: $primary-color;
+      color: white;
       border: none;
-      font-size: 24px;
       padding: 10px;
       cursor: pointer;
-      border-radius: 50%;
-      margin: 0 10px;
+      font-size: 20px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+
+      &.left {
+        left: 0;
+      }
+
+      &.right {
+        right: 0;
+      }
 
       &:hover {
-        background: #ddd;
+        background: darken($primary-color, 10%);
       }
     }
 
     .slides {
       display: flex;
-      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 15px;
+      padding: 20px;
+      max-width: 100%;
 
       .slide {
-        width: 200px;
-        img {
-          width: 100%;
-          height: auto;
-        }
-        h4 {
-          margin-top: 10px;
-          font-weight: 600;
-        }
-        p {
-          font-size: 12px;
-          color: #555;
+        flex: 0 0 auto;
+        width: calc(100% / 3); // Hiển thị tối đa 3 sản phẩm mỗi lần
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: white;
+        transition: 0.3s;
+        scroll-snap-align: center;
+
+        &:hover {
+          box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
       }
     }
   }
 }
 
+.products-section {
+  padding: 40px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: $primary-color;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // Sắp xếp sản phẩm tự động
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    background: white;
+    transition: 0.3s;
+
+    &:hover {
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+      width: 180px;    // Thu nhỏ hình ảnh theo kích thước cố định
+      height: 180px;
+      object-fit: cover;  // Giữ tỷ lệ hình khi cắt
+      border-radius: 5px;
+      margin: 0 auto;   // Căn giữa ảnh theo chiều ngang
+    }
+
+    .product-name {
+      font-size: 1.5rem;
+      color: $primary-color;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 1.2rem;
+      color: darken($primary-color, 20%);
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px; // Khoảng cách giữa các phần tử
+
+      .btn {
+        padding: 0.5em 1em;
+      }
+    }
+  }
+}
+
+.footer {
+  background: $secondary-color;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
 // phân trang 
 .pagination {
-    display: flex;               /* Sử dụng flexbox */
-    justify-content: center;     /* Căn giữa các phần tử */
-    align-items: center;         /* Căn giữa theo chiều dọc */
-    margin-top: 20px;
+  display: flex;
+  /* Sử dụng flexbox */
+  justify-content: center;
+  /* Căn giữa các phần tử */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  margin-top: 20px;
+  padding: 10px 15px;
 
-    button {
-        padding: 10px 15px;
-        margin: 0 5px;
-        border: none;
-        border-radius: 5px;
-        background-color: #002fff; /* Màu nền cho nút */
-        color: rgb(0, 0, 0);
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #002fff;
+    /* Màu nền cho nút */
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
-        &:hover {
-            background-color: #ffffff; /* Màu khi hover */
-        }
-
-        &.active {
-            background-color: #3efd5e; /* Màu nền cho nút hiện tại */
-        }
-
-        &:disabled {
-            background-color: #e0e0e0; /* Màu cho nút bị vô hiệu hóa */
-            color: #a0a0a0; /* Màu chữ cho nút bị vô hiệu hóa */
-            cursor: not-allowed; /* Thay đổi con trỏ khi không cho click */
-        }
+    &:hover {
+      background-color: #ffffff;
+      /* Màu khi hover */
     }
+
+    &.active {
+      background-color: #3efd5e;
+      /* Màu nền cho nút hiện tại */
+    }
+
+    &:disabled {
+      background-color: #e0e0e0;
+      /* Màu cho nút bị vô hiệu hóa */
+      color: #a0a0a0;
+      /* Màu chữ cho nút bị vô hiệu hóa */
+      cursor: not-allowed;
+      /* Thay đổi con trỏ khi không cho click */
+    }
+  }
 }

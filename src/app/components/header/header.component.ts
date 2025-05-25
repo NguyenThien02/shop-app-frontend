@@ -23,4 +23,14 @@ export class HeaderComponent {
       this.router.navigate(['/seller/home'])
     }
   }
+  
+  getCart(){
+    const cartId = this.localStorageService.getCartFromLocalStorage();
+  if (cartId) {
+
+    this.router.navigate(['/user/cart', cartId]);
+  } else {
+    console.warn('No cart ID found in local storage.');
+  }
+  }
 }

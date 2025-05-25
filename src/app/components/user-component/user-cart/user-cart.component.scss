@@ -1,0 +1,113 @@
+.form-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Khoảng cách giữa các phần */
+}
+.section-title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #2c3e50;
+}
+.pricing-table {
+    width: 100%; /* Bảng chiếm toàn bộ chiều rộng */
+    border-collapse: collapse; /* Bỏ khoảng cách giữa các ô */
+    margin-top: 1.5rem; /* Khoảng cách phía trên bảng */
+    font-family: Arial, sans-serif; /* Kiểu chữ */
+}
+
+.pricing-table thead {
+    background-color: #007bff; /* Màu nền cho phần đầu bảng */
+    color: white; /* Màu chữ trắng */
+}
+
+.pricing-table th, .pricing-table td {
+    padding: 0.75rem; /* Padding bên trong ô */
+    text-align: center; /* Căn giữa nội dung */
+    border: 1px solid #dee2e6; /* Đường viền ô */
+}
+
+.pricing-table .sub-header {
+    font-weight: bold; /* Đậm chữ phần tiêu đề */
+    text-transform: uppercase; /* Viết hoa chữ */
+}
+
+.pricing-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Màu nền xen kẽ cho các hàng */
+}
+
+.pricing-table tbody tr:hover {
+    background-color: #e9ecef; /* Màu nền khi di chuột qua hàng */
+    cursor: pointer; /* Đổi con trỏ khi di chuột qua */
+}
+
+.pricing-table .sub-header {
+    font-weight: bold; /* Đậm chữ phần tiêu đề */
+    text-transform: uppercase; /* Viết hoa chữ */
+}
+.action-buttons {
+    text-align: center; /* Căn giữa nút "Thêm" */
+}
+
+
+// phân trang 
+.pagination {
+  display: flex;
+  /* Sử dụng flexbox */
+  justify-content: center;
+  /* Căn giữa các phần tử */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  margin-top: 20px;
+  padding: 10px 15px;
+
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #002fff;
+    /* Màu nền cho nút */
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ffffff;
+      /* Màu khi hover */
+    }
+
+    &.active {
+      background-color: #3efd5e;
+      /* Màu nền cho nút hiện tại */
+    }
+
+    &:disabled {
+      background-color: #e0e0e0;
+      /* Màu cho nút bị vô hiệu hóa */
+      color: #a0a0a0;
+      /* Màu chữ cho nút bị vô hiệu hóa */
+      cursor: not-allowed;
+      /* Thay đổi con trỏ khi không cho click */
+    }
+  }
+}
+
+  
+  .add-button {
+    padding: 0.5rem 1rem; /* Padding cho nút */
+    border: none; /* Bỏ viền nút */
+    border-radius: 0.25rem; /* Bo góc cho nút */
+    background-color: #2df73e; /* Màu nền cho nút */
+    color: white; /* Màu chữ */
+    font-weight: bold; /* Đậm chữ */
+    cursor: pointer; /* Con trỏ chỉ tay khi di chuột qua */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển tiếp khi di chuột qua */
+}
+
+.add-button:hover {
+    background-color: #09af2d; /* Đổi màu nền khi di chuột qua nút */
+}

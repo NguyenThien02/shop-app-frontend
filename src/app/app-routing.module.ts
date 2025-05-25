@@ -9,13 +9,17 @@ import { UserHomeComponentComponent } from './components/user-component/user-hom
 
 import { SellerHomeComponentComponent } from './components/seller-compenent/seller-home-component/seller-home-component.component';
 import { SellerCreateProductComponent } from './components/seller-compenent/seller-create-product/seller-create-product.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { UserCartComponent } from './components/user-component/user-cart/user-cart.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'register', component: RegisterComponentComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'product-detail/:product-id', component: ProductDetailComponent},
 
     {path: 'user/home', component: UserHomeComponentComponent},
+    {path: 'user/cart/:cart-id', component: UserCartComponent},
 
     {path: 'seller/home', component: SellerHomeComponentComponent},
     {path: 'seller/create-product', component: SellerCreateProductComponent} 

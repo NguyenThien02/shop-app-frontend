@@ -10,6 +10,7 @@ export class LocalStorageService {
     // readonly: Ngăn không cho gán lại giá trị sau khi khởi tạo
     private readonly TOKEN_KEY = 'access_token';
     private readonly USER_RESPONSE = 'user_response';
+    private readonly CART = 'cart';
     // private jwtHelperService = new JwtHelperService();
     // Biến tham chiếu đến localStorage của trình duyệt
     localStorage?: Storage;
@@ -28,16 +29,27 @@ export class LocalStorageService {
         return this.localStorage?.getItem(this.TOKEN_KEY) ?? '';
     }
 
-    setUserResponseToLocalStorage(userResponse : UserResponse){
+    setUserResponseToLocalStorage(userResponse: UserResponse) {
         //chuyển đổi đối tượng userResponse thành một chuỗi JSON
-      const userResponseJSON = JSON.stringify(userResponse);
-      localStorage.setItem(this.USER_RESPONSE, userResponseJSON);
+        const userResponseJSON = JSON.stringify(userResponse);
+        localStorage.setItem(this.USER_RESPONSE, userResponseJSON);
     }
 
-    getUserResponseFromLocalStorage(){
+    getUserResponseFromLocalStorage() {
         const userResponseJSON = this.localStorage?.getItem(this.USER_RESPONSE);
         const userResponse = JSON.parse(userResponseJSON ?? 'null')
         return userResponse;
+    }
+
+    setCartToLocalStorage(cartId: number) {
+        const cartIdString = cartId.toString();
+        localStorage.setItem(this.CART, cartIdString);
+    }
+
+    getCartFromLocalStorage(): number | null {
+        const cartIdString = this.localStorage?.getItem(this.CART);
+        const cartId = cartIdString ? +cartIdString : null;
+        return cartId;
     }
 
     // removeToken(): void {

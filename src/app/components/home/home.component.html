@@ -4,27 +4,27 @@
     <section class="hero-section">
         <div class="container">
             <h1>Khám phá thế giới mua sắm của bạn</h1>
-            <p>Hàng ngàn sản phẩm chất lượng, giá cả phải chăng, giao hàng nhanh chóng.</p>
+            <p class="subtext">Hàng ngàn sản phẩm chất lượng, giá cả phải chăng, giao hàng nhanh chóng.</p>
             <a href="#" class="btn btn-primary btn-large">Mua ngay</a>
         </div>
     </section>
 
     <div class="collections">
-        <h2>Sản phẩm nổi bật</h2>
-        <p class="description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur, adipisci
-            repellat!
-        </p>
-        <div class="carousel">
-            <button class="nav left" (click)="prevSlide()">&#8592;</button>
-            <div class="slides">
-                <div class="slide" *ngFor="let item of featuredProductRespons">
-                    <img [src]="item.image_url" alt="Product Image">
-                    <h4>{{item.product_name}}</h4>
-                    <p>{{item.description}}</p>
+        <div class="container">
+            <h2>Sản phẩm nổi bật</h2>
+            <p class="description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur,
+                adipisci repellat!
+            </p>
+            <div class="carousel">
+                <div class="slides">
+                    <div class="slide" *ngFor="let item of featuredProductRespons; let i = index" [routerLink]="['/product-detail', item.product_response_id]">
+                        <img [src]="item.image_url" alt="Product Image">
+                        <h4>{{item.product_name}}</h4>
+                        <p>{{item.description}}</p>
+                    </div>
                 </div>
             </div>
-            <button class="nav right" (click)="nextSlide()">&#8594;</button>
         </div>
     </div>
 
@@ -32,26 +32,25 @@
     <section class="products-section">
         <div class="container">
             <h2>Sản phẩm mới nhất</h2>
-            <div class="container">
-                <div class="row product-row">
-                    <div class="col-lg-4 col-md-5 col-sm-6" *ngFor="let product of productRespons">
-                        <div class="product-card">
-                            <img [src]="product.image_url" alt="Product Image" class="product-image">
-                            <h3 class="product-name">{{product.product_name}}</h3>
-                            <p class="product-specialty"> {{product.price}}</p>
-                            <button class="btn btn-primary" [routerLink]="['/doctor-detail', product.product_id]">Xem
-                                Chi tiết</button>
-                        </div>
+            <div class="product-grid">
+                <div class="product-card" *ngFor="let product of productRespons">
+                    <img [src]="product.image_url" alt="Product Image" class="product-image">
+                    <h3 class="product-name">{{ product.product_name }}</h3>
+                    <p class="product-price">Giá: {{ product.price | currency:'VND':'symbol':'1.0-0' }}</p>
+                    <div class="actions">
+                        <button class="btn btn-primary" [routerLink]="['/product-detail', product.product_response_id]">
+                            <i class="bi bi-cart-plus" ></i> Chi tiết
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
     <div class="pagination">
-        <button (click)="changePage(page - 1)" [disabled]="page === 0">Previous</button>
-        <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1
-            }}</button>
-        <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Next</button>
+        <button (click)="changePage(page - 1)" [disabled]="page === 0">Trước</button>
+        <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1 }}</button>
+        <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Tiếp</button>
     </div>
 </main>
 

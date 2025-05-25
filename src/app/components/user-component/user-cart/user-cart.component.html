@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="form-section">
+    <h2 class="section-title">Danh sách giỏ hàng</h2>
+    <table class="pricing-table">
+        <thead>
+            <tr>
+                <th class="sub-header">STT</th>
+                <th class="sub-header">Tên sản phẩm</th>
+                <th class="sub-header">Số lượng đã chọn</th>
+                <th class="sub-header">Tổng giá</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cartItem of cartItems; let i = index">
+                <td>{{(page * 10) + (i + 1)}}</td>
+                <td>{{ cartItem.product.product_name }}</td>
+                <td>{{ cartItem.quantity }}</td>
+                <td>{{ cartItem.quantity * cartItem.product.price | currency:'VND':'symbol':'1.0-0' }}</td>
+                <td class="action-buttons">
+                    <button class="add-button">Đặt hàng</button>
+                </td>
+            </tr>
+        </tbody>
+        <div class="pagination">
+            <button (click)="changePage(page - 1)" [disabled]="page === 0">Trước</button>
+            <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1 }}</button>
+            <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Tiếp</button>
+        </div>
+    </table>
+
+</div>

@@ -1,0 +1,44 @@
+<app-header></app-header>
+<div class="product-detail-container">
+    <div class="product-content" *ngIf="product">
+        <div class="product-image-area">
+            <img [src]="product.image_url" alt="{{ product.product_name }}" class="detail-product-image">
+        </div>
+
+        <div class="product-info-area" >
+            <h1 class="product-name">{{ product.product_name }}</h1>
+            <p class="product-category">
+                <span class="label">Danh mục:</span> {{ product.category.categoryName }}
+            </p>
+            <p class="product-seller">
+                <span class="label">Người bán:</span> {{ product.seller_respone.full_name }}
+            </p>
+            <p class="product-price">
+                <span class="label">Giá:</span> {{ product.price| currency:'VND':'symbol':'1.0-0' }}
+            </p>
+            <p class="product-stock">
+                <span class="label">Kho:</span>
+                <span [class.out-of-stock]="product.stock_quantity === 0">
+                    {{ product.stock_quantity > 0 ? product.stock_quantity : 'Hết hàng' }}
+                </span>
+            </p>
+            <p class="product-description">
+                <span class="label">Mô tả:</span> {{ product.description }}
+            </p>
+
+            <div class="quantity-selector">
+                <h4>Số Lượng</h4>
+                <input type="number" [(ngModel)]="quantity" min="1" max="10" class="quantity-input">
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-add-to-cart" (click)="addToCartItem()">
+                    <i class="bi bi-cart-plus"></i> Thêm Vào Giỏ Hàng
+                </button>
+                <button class="btn btn-buy-now" (click)="buyNow()">
+                    Mua Ngay
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

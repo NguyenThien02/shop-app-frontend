@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { count } from 'rxjs';
 import { LoginDTO } from 'src/app/dtos/LoginDTO';
+import { CartService } from 'src/app/services/CartService';
 import { LocalStorageService } from 'src/app/services/LocalStorageService';
 import { UserService } from 'src/app/services/UserService';
 
@@ -18,7 +19,8 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private cartService : CartService
   ) { }
 
   login() {
@@ -38,7 +40,8 @@ export class LoginComponent {
           this.localStorageService.setUserResponseToLocalStorage(response.user_response)
         }
         if (response.user_response.role.roleId == 1) {
-          this.router.navigate(['/user/home'])
+          this.setCartToLocalStorage(response.user_response.id);
+          this.router.navigate(['/'])
         }
         if (response.user_response.role.roleId == 2) {
           this.router.navigate(['/seller/home'])
@@ -47,6 +50,18 @@ export class LoginComponent {
       error: (error: any) => {
         console.error('Error:', error);
       }
+    })
+  }
+
+  setCartToLocalStorage(userId : number){
+    debugger
+    this.cartService.getCartByUserId(userId).subscribe({
+      next : (response : any) => {
+        debugger
+        this.localStorageService.setCartToLocalStorage(response.id);
+      },error(err) {
+          console.error(err);
+      },
     })
   }
 }

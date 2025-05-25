@@ -15,12 +15,16 @@ export class HomeComponent implements OnInit {
   featuredProductRespons: ProductResponse[] = [];
 
   page: number = 0;
-  limit: number = 9;
+  limit: number = 12;
   totalPages: number = 0;
   pages: number[] = [];
 
   pageFeatured: number = 0;
-  limitFeatured: number = 3;
+  limitFeatured: number = 10;
+
+  isModalOpen = false;
+  quantity = 1;
+  selectedProduct: any;
 
   constructor(
     private productService: ProductService
@@ -63,17 +67,13 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  nextSlide() {
-    this.getFeaturedProduct(this.pageFeatured + 1, this.limitFeatured);
-    this.pageFeatured += 1;
+  openProductDetail(product: any) {
+    debugger
+    this.selectedProduct = product;
+    this.isModalOpen = true;
   }
 
-  prevSlide() {
-    this.getFeaturedProduct(this.pageFeatured - 1, this.limitFeatured);
-    this.pageFeatured -= 1;
-  }
-
-    changePage(page: number) {
+  changePage(page: number) {
     if (page >= 0 && page < this.totalPages) {
       this.page = page;
       this.getProductByCategory(this.page, this.limit, this.categoryId);

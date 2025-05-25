@@ -15,6 +15,8 @@ import { UserHomeComponentComponent } from './components/user-component/user-hom
 import { SellerHeaderCompenentComponent } from './components/seller-compenent/seller-header-compenent/seller-header-compenent.component';
 import { SellerHomeComponentComponent } from './components/seller-compenent/seller-home-component/seller-home-component.component';
 import { SellerCreateProductComponent } from './components/seller-compenent/seller-create-product/seller-create-product.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { UserCartComponent } from './components/user-component/user-cart/user-cart.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SellerCreateProductComponent } from './components/seller-compenent/sell
     
     SellerHeaderCompenentComponent,
     SellerHomeComponentComponent,
-    SellerCreateProductComponent
+    SellerCreateProductComponent,
+    ProductDetailComponent,
+    UserCartComponent
   ],
   imports: [
     BrowserModule,
