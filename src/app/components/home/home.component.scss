@@ -122,11 +122,11 @@ body {
     }
 
     .product-image {
-      width: 180px;    // Thu nhỏ hình ảnh theo kích thước cố định
+      width: 180px; // Thu nhỏ hình ảnh theo kích thước cố định
       height: 180px;
-      object-fit: cover;  // Giữ tỷ lệ hình khi cắt
+      object-fit: cover; // Giữ tỷ lệ hình khi cắt
       border-radius: 5px;
-      margin: 0 auto;   // Căn giữa ảnh theo chiều ngang
+      margin: 0 auto; // Căn giữa ảnh theo chiều ngang
     }
 
     .product-name {
@@ -161,6 +161,54 @@ body {
   text-align: center;
   padding: 20px;
 }
+
+
+// tìm kiếm
+/* SCSS Styles */
+.search-box {
+  display: flex;
+  justify-content: center; // Căn giữa search-box trên trang
+  align-items: center; // Căn giữa các phần tử trong search-box
+  gap: 8px; // Giảm khoảng cách giữa select và nút
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 300px; // Giảm chiều rộng tối đa của search-box
+  margin: 0 auto; // Căn giữa toàn bộ search-box trên trang
+  margin-top: 10px;
+
+  .form-control {
+    flex: 1; // Để select chiếm không gian còn lại
+    padding: 6px;
+    font-size: 14px; // Giảm kích thước font chữ
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+  }
+
+  .btn {
+    padding: 6px 12px; // Giảm kích thước nút
+    font-size: 14px; // Giảm kích thước font chữ cho nút
+    font-weight: bold;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
+
 
 // phân trang 
 .pagination {

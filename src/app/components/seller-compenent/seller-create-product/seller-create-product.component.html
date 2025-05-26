@@ -4,6 +4,8 @@
     <div class="main-content">
         <div class="form-section">
             <h2 class="section-title">Thêm sản phẩm</h2>
+             <input type="file" (change)="onFileProduct($event)" />
+             <button type="submit" class="btn btn-primary" (click)="uploadFileProducts()">Nhập danh sách</button>
             <hr class="divider">
             <div class="form-group">
                 <h4>Tên sản phẩm:</h4>

@@ -17,6 +17,7 @@ export class SellerCreateProductComponent implements OnInit {
   price: number = 0;
   stockQuantity: number = 0;
   selectedFile?: File;
+  fileProducts? : File
   selectedCategoryId: number = 0;
   categories: Category[] = [];
 
@@ -67,6 +68,24 @@ export class SellerCreateProductComponent implements OnInit {
       })
     } else {
       console.error('File is required');
+    }
+  }
+
+  onFileProduct(event: any) {
+    this.fileProducts = event.target.files[0];
+  }
+
+  uploadFileProducts(){
+    if(this.fileProducts){
+      debugger
+      this.productService.uploadFileProducts(this.fileProducts).subscribe({
+        next : (response : any) => {
+          debugger
+          alert(response.message)
+        }, error(err) {
+            console.error(err);
+        },
+      })
     }
   }
 }

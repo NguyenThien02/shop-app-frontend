@@ -12,6 +12,7 @@ export class ProductService {
     private apiGetFeaturedProduct = `${environment.apiBaseUrl}/products/featured`;
     private apiCreateProduct = `${environment.apiBaseUrl}/products/create`;
     private apiGetProductDetail = `${environment.apiBaseUrl}/products`;
+    private apiUploadFileProducts = `${environment.apiBaseUrl}/products/upload-file-products`;
     
     constructor(private http: HttpClient){ }
 
@@ -45,5 +46,11 @@ export class ProductService {
     getProductDetail(productId : number){
         debugger
         return this.http.get(`${this.apiGetProductDetail}/${productId}`)
+    }
+
+    uploadFileProducts(fileProduct : File){
+        const formData = new FormData();
+        formData.append('fileProduct', fileProduct);
+        return this.http.post(this.apiUploadFileProducts, formData);
     }
 }

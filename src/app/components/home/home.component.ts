@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/app/environment/environment';
 import { Category } from 'src/app/models/Category';
 import { ProductResponse } from 'src/app/responses/ProductResponse';
+import { CategoryService } from 'src/app/services/CategoryService';
 import { ProductService } from 'src/app/services/ProductService';
 
 @Component({
@@ -10,7 +11,7 @@ import { ProductService } from 'src/app/services/ProductService';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  categoryId: number = 0;
+  
   productRespons: ProductResponse[] = [];
   featuredProductRespons: ProductResponse[] = [];
 
@@ -18,6 +19,8 @@ export class HomeComponent implements OnInit {
   limit: number = 12;
   totalPages: number = 0;
   pages: number[] = [];
+  categoryId: number = 0;
+  categories : Category[] = [];
 
   pageFeatured: number = 0;
   limitFeatured: number = 10;
@@ -27,12 +30,24 @@ export class HomeComponent implements OnInit {
   selectedProduct: any;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryService : CategoryService
   ) { }
 
   ngOnInit() {
     this.getProductByCategory(this.page, this.limit, this.categoryId);
     this.getFeaturedProduct(this.pageFeatured, this.limitFeatured);
+    this.getAllCategories();
+  }
+
+  getAllCategories(){
+    this.categoryService.getAllCategories().subscribe({
+      next : (response : any) => {
+        this.categories = response;
+      },error(err) {
+          console.error(err);
+      },
+    })
   }
 
   getProductByCategory(page: number, limit: number, categoryId: number) {
@@ -65,6 +80,10 @@ export class HomeComponent implements OnInit {
         console.error('Error:', error);
       }
     })
+  }
+
+  searchProducts(){
+    this.getProductByCategory(this.page, this.limit, this.categoryId);
   }
 
   openProductDetail(product: any) {
