@@ -111,3 +111,17 @@
 .add-button:hover {
     background-color: #09af2d; /* Đổi màu nền khi di chuột qua nút */
 }
+
+.delete-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: #ee2424; /* Màu nền xanh dương nhạt */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.delete-button:hover {
+    background-color: #b31a1a; /* Đổi màu khi di chuột qua */
+}

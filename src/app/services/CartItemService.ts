@@ -8,15 +8,14 @@ import { CartItemsDTO } from "../dtos/CartItemsDTO";
 })
 
 export class CartItemService {
-    private apiCreatCartItem = `${environment.apiBaseUrl}/cart-items/create`;
-    private apiGetAllCartItemByCartId = `${environment.apiBaseUrl}/cart-items`;
+    private apiCartItem = `${environment.apiBaseUrl}/cart-items`;
 
     constructor(
         private http: HttpClient
     ) { }
 
     createCartItem(cartItemsDTO: CartItemsDTO) {
-        return this.http.post(this.apiCreatCartItem, cartItemsDTO);
+        return this.http.post(`${this.apiCartItem}/create`, cartItemsDTO);
     }
 
     getAllCartItemByCartId(cartId: number, page: number, limit: number) {
@@ -24,6 +23,14 @@ export class CartItemService {
             .set('page', page.toString())
             .set('limit', limit.toString());
 
-        return this.http.get(`${this.apiGetAllCartItemByCartId}/${cartId}`, {params});
+        return this.http.get(`${this.apiCartItem}/${cartId}`, {params});
+    }
+
+    deleteCartItemById(cartItemId : number){
+        return this.http.delete(`${this.apiCartItem}/${cartItemId}`);
+    }
+
+    getCartItemByIds(selectCartItemsIds : number[]){
+        return this.http.post(`${this.apiCartItem}/by-ids`, selectCartItemsIds)
     }
 }

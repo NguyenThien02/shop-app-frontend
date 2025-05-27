@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="order-form-container">
+    <h2>Đặt hàng</h2>
+    <form (ngSubmit)="submitOrder()">
+        <div class="form-group">
+            <label for="user_id">Người đặt hàng</label>
+            <h5>{{userResponse?.full_name}}</h5>
+        </div>
+
+        <div class="form-group">
+            <label for="shipping_addres">Địa chỉ giao hàng</label>
+            <textarea id="shipping_addres" [(ngModel)]="shippingAddres" name="shipping_addres" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="total_amount">Tổng tiền (VNĐ)</label>
+            <h3>{{totalAmount}}</h3>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Ghi chú</label>
+            <textarea id="notes" [(ngModel)]="notes" name="notes"></textarea>
+        </div>
+    </form>
+
+    <hr>
+    <div class="form-section">
+        <h2 class="section-title">Danh sách dịch vụ y tế đã chọn</h2>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th class="sub-header">STT</th>
+                    <th class="sub-header">Tên sản phẩm</th>
+                    <th class="sub-header">Số lượng đã chọn</th>
+                    <th class="sub-header">Tổng giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let selectcartItem of selectCartItems; let i = index">
+                    <td>{{(i + 1)}}</td>
+                    <td>{{ selectcartItem.product.product_name }}</td>
+                    <td>{{ selectcartItem.quantity }}</td>
+                    <td>{{ selectcartItem.quantity * selectcartItem.product.price | currency:'VND':'symbol':'1.0-0' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+       <button type="submit" class="submit-button" (click)="submitOrder()">Xác nhận đặt hàng</button>
+</div>

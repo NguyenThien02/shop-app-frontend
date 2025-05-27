@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartItemsResponse } from 'src/app/responses/CartItemResponse';
+import { ProductResponse } from 'src/app/responses/ProductResponse';
 import { CartItemService } from 'src/app/services/CartItemService';
+import { LocalStorageService } from 'src/app/services/LocalStorageService';
 
 @Component({
   selector: 'app-user-cart',
@@ -17,14 +19,20 @@ export class UserCartComponent implements OnInit {
   totalPages: number = 0;
   pages: number[] = [];
 
+  selectCartItems: CartItemsResponse[] = [];
+  selectCartItemsIds: number[] = [];
+  totalAmount: number = 0;
+
   constructor(
     private route: ActivatedRoute,
-    private cartItemService: CartItemService
+    private cartItemService: CartItemService,
+    private localStorageService: LocalStorageService
   ) { }
 
   ngOnInit(): void {
     this.getCartId();
     this.getAllCartItemByCartId(this.page, this.limit);
+    this.getSelectCartItems()
   }
 
   getCartId() {
@@ -37,8 +45,7 @@ export class UserCartComponent implements OnInit {
     }
   }
 
-  getAllCartItemByCartId(page: number, limit:number) {
-    debugger
+  getAllCartItemByCartId(page: number, limit: number) {
     this.cartItemService.getAllCartItemByCartId(this.cartId, this.page, this.limit).subscribe({
       next: (response: any) => {
         debugger
@@ -51,10 +58,69 @@ export class UserCartComponent implements OnInit {
     })
   }
 
+  deleteCartItemById(cartItemId: number) {
+    const confirmed = confirm("Bạn có chắc muốn xóa cart items này khong!")
+    if (confirmed) {
+      this.cartItemService.deleteCartItemById(cartItemId).subscribe({
+        next: (response: any) => {
+          debugger
+          alert(response.message);
+          window.location.reload();
+        },
+        error: (error: Error) => {
+          alert(error);
+        }
+      })
+    }
+  }
+
   changePage(page: number) {
     if (page >= 0 && page < this.totalPages) {
       this.page = page;
       this.getAllCartItemByCartId(this.page, this.limit);
     }
   }
+
+  addCartItems(selectCartItemId: number) {
+    const confirmed = confirm('Bạn có chắc chắn muốn chọn dịch vụ này');
+    if (confirmed) {
+      debugger
+      if(!this.selectCartItemsIds.includes(selectCartItemId)){
+        this.selectCartItemsIds.push(selectCartItemId);
+      }
+      this.localStorageService.setCartItemsToLocalStorage(this.selectCartItemsIds);
+      this.getSelectCartItems();
+    }
+  }
+
+  getSelectCartItems() {
+    const storedData = this.localStorageService.getCartItemsFromLocalStorage();
+    this.selectCartItemsIds = storedData ? JSON.parse(storedData) : [];
+    this.cartItemService.getCartItemByIds(this.selectCartItemsIds).subscribe({
+      next: (response: any) => {
+        debugger
+        this.selectCartItems = response;
+        this.selectCartItems.forEach((cartItem : CartItemsResponse) => {
+            this.totalAmount += cartItem.product.price * cartItem.quantity;
+        });
+      }, error(err) {
+        alert(err);
+      },
+    })
+  }
+
+  deleteSelectCartItemById(selectCartItemId: number) {
+    const storedData = this.localStorageService.getCartItemsFromLocalStorage();
+    this.selectCartItemsIds = storedData ? JSON.parse(storedData) : [];
+
+    this.selectCartItemsIds = this.selectCartItemsIds.filter(id => id != selectCartItemId);
+    this.localStorageService.setCartItemsToLocalStorage(this.selectCartItemsIds);
+
+    this.getSelectCartItems();
+  }
+
+  createOrder() {
+
+  }
+
 }

@@ -11,6 +11,7 @@ import { SellerHomeComponentComponent } from './components/seller-compenent/sell
 import { SellerCreateProductComponent } from './components/seller-compenent/seller-create-product/seller-create-product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { UserCartComponent } from './components/user-component/user-cart/user-cart.component';
+import { UserOrderComponent } from './components/user-component/user-order-component/user-order.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
 
     {path: 'user/home', component: UserHomeComponentComponent},
     {path: 'user/cart/:cart-id', component: UserCartComponent},
+    {path: 'user/order', component: UserOrderComponent},
 
     {path: 'seller/home', component: SellerHomeComponentComponent},
     {path: 'seller/create-product', component: SellerCreateProductComponent} 

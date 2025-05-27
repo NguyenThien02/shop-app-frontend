@@ -11,6 +11,8 @@ export class LocalStorageService {
     private readonly TOKEN_KEY = 'access_token';
     private readonly USER_RESPONSE = 'user_response';
     private readonly CART = 'cart';
+    private readonly CARTITEMS = 'cart_items';
+
     // private jwtHelperService = new JwtHelperService();
     // Biến tham chiếu đến localStorage của trình duyệt
     localStorage?: Storage;
@@ -51,6 +53,16 @@ export class LocalStorageService {
         const cartId = cartIdString ? +cartIdString : null;
         return cartId;
     }
+
+    getCartItemsFromLocalStorage(){
+        const listCartItemId = this.localStorage?.getItem(this.CARTITEMS);
+        return listCartItemId;
+    }
+
+    setCartItemsToLocalStorage(selectCartItemsIds : number[]){
+        return this.localStorage?.setItem(this.CARTITEMS, JSON.stringify(selectCartItemsIds));
+    }
+
 
     // removeToken(): void {
     //     if (this.localStorage) {
