@@ -12,7 +12,6 @@ export class RoleService {
     constructor(private http: HttpClient) { }
 
     getRoles():Observable<any> {
-    debugger
     return this.http.get<any[]>(this.apiGetRole);
   }
 }

@@ -38,7 +38,6 @@ export class SellerCreateProductComponent implements OnInit {
   getAllCategories() {
     this.categoryService.getAllCategories().subscribe({
       next: (response: any) => {
-        debugger
         this.categories = response;
       }, error(err) {
         alert(`Error get all categories: ${err}`)
@@ -60,7 +59,6 @@ export class SellerCreateProductComponent implements OnInit {
     if (this.selectedFile) {
       this.productService.createProduct(productDTO, this.selectedFile).subscribe({
         next : (response : any) => {
-          debugger
           alert("create successful product")
         },error(err) {
             console.error('Error:', err);
@@ -77,10 +75,8 @@ export class SellerCreateProductComponent implements OnInit {
 
   uploadFileProducts(){
     if(this.fileProducts){
-      debugger
       this.productService.uploadFileProducts(this.fileProducts).subscribe({
         next : (response : any) => {
-          debugger
           alert(response.message)
         }, error(err) {
             console.error(err);

@@ -13,8 +13,7 @@
         <div class="container">
             <h2>Sản phẩm nổi bật</h2>
             <p class="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe voluptas ut dolorum consequuntur,
-                adipisci repellat!
+                Khám phá bộ sưu tập sản phẩm chất lượng cao, thiết kế tinh tế, mang đến trải nghiệm tuyệt vời cho bạn!
             </p>
             <div class="carousel">
                 <div class="slides">
@@ -47,7 +46,7 @@
                 <div class="product-card" *ngFor="let product of productRespons">
                     <img [src]="product.image_url" alt="Product Image" class="product-image">
                     <h3 class="product-name">{{ product.product_name }}</h3>
-                    <p class="product-price">Giá: {{ product.price | currency:'VND':'symbol':'1.0-0' }},000</p>
+                    <p class="product-price">Giá: {{ product.price | currency:'VND':'symbol':'1.0-0' }}</p>
                     <div class="actions">
                         <button class="btn btn-primary" [routerLink]="['/product-detail', product.product_response_id]">
                             <i class="bi bi-cart-plus"></i> Chi tiết

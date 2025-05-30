@@ -1,38 +1,32 @@
 <app-header></app-header>
-<h1>Đăng ký tài khoản</h1>
-<form class="register-form">
+<div class="main-block">
+  <h1>Đăng ký</h1>
+  <form action="/">
+    <label id="icon" for="name"><i class="fa-solid fa-phone"></i></label>
+    <input type="text" name="name" id="name" placeholder="Số điện thoại" required [(ngModel)]="phoneNumber" />
+    <label id="icon" for="name"><i class="fas fa-user"></i></label>
+    <input type="text" name="name" id="name" placeholder="Họ và Tên" required [(ngModel)]="fullName" />
+    <label id="icon" for="name"><i class="fas fa-unlock-alt"></i></label>
+    <input type="password" name="name" id="name" placeholder="Mật khẩu" required [(ngModel)]="password" />
+    <label id="icon" for="name"><i class="fas fa-unlock-alt"></i></label>
+    <input type="password" name="name" id="name" placeholder="Nhập lại mật khẩu" required [(ngModel)]="retypePassword" />
+    <label id="icon" for="name"><i class="fa-solid fa-location-dot"></i></label>
+    <input type="text" name="name" id="name" placeholder="Địa chỉ" required [(ngModel)]="address" />
+    <label id="icon" for="dateOfBirth"><i class="fa-solid fa-cake-candles"></i></label>
+    <input type="date" name="dateOfBirth" id="dateOfBirth" required [(ngModel)]="birthday" z/>
+    <hr>
     <div class="form-group">
-        <h4>Số điện thoại:</h4>
-        <input type="text" name="phoneNumber" [(ngModel)]="phoneNumber" required>
+      <h5>Bạn muốn đăng ký là</h5>
+      <select name="selectedRole" [(ngModel)]="selectedRole">
+        <option *ngFor="let role of roles" [ngValue]="role">
+          {{ role.name }}
+        </option>
+      </select>
     </div>
-    <div class="form-group">
-        <h4>Tên người dùng:</h4>
-        <input type="text" name="fullName" [(ngModel)]="fullName" required>
+    <hr>
+    <div class="btn-block">
+      <p>By clicking Register, you agree on our <a href="">Privacy Policy for W3Docs</a>.</p>
+      <button type="submit" (click)="register()">Đăng ký</button>
     </div>
-    <div class="form-group">
-        <h4>Mật khẩu:</h4>
-        <input type="password" name="password" [(ngModel)]="password" required>
-    </div>
-    <div class="form-group">
-        <h4>Xác nhận mật khẩu:</h4>
-        <input type="password" name="retypePassword" [(ngModel)]="retypePassword" required>
-    </div>
-    <div class="form-group">
-        <h4>Địa chỉ:</h4>
-        <input type="text" name="address" [(ngModel)]="address" required>
-    </div>
-    <div class="form-group">
-        <h4>Ngày tháng năm sinh</h4>
-        <input type="date" name="birthday" [(ngModel)]="birthday">
-    </div>
-    <div class="form-group">
-        <h4>Bạn muốn đăng ký là</h4>
-        <select name="selectedRole" [(ngModel)]="selectedRole">
-            <option *ngFor="let role of roles" [ngValue]="role">
-                {{ role.name }}
-            </option>
-        </select>
-    </div>
-    <button type="submit" class="btn-submit" (click)="register()">Đăng ký</button>
-    <p class="login-link">Bạn đã có tài khoản? <a routerLink="/login" >Đăng nhập ngay</a></p>
-</form>
+  </form>
+</div>

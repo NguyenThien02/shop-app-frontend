@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
   }
 
   searchProducts(){
-    this.getProductByCategory(this.page, this.limit, this.categoryId);
+    this.getProductByCategory(0, this.limit, this.categoryId);
   }
 
   openProductDetail(product: any) {

@@ -33,10 +33,8 @@ export class RegisterComponentComponent implements OnInit{
   }
 
   getRole(){
-    debugger
     this.roleService.getRoles().subscribe({
       next: (roles: Role[]) => {
-        debugger
         this.roles = roles;
       },
       error: (error: any) => {
@@ -46,7 +44,6 @@ export class RegisterComponentComponent implements OnInit{
   }
 
   register() {
-    debugger
     const registerDTO: RegisterDTO = {
       "full_name": this.fullName,
       "phone_number": this.phoneNumber,
@@ -58,7 +55,6 @@ export class RegisterComponentComponent implements OnInit{
     }
     this.userService.register(registerDTO).subscribe({
       next: (response : any) => {
-        debugger
         this.router.navigate(['/login']);
       },
       error: (error: any) => {
