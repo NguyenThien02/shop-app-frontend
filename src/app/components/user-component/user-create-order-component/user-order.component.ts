@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OrderDetailDTO } from 'src/app/dtos/OrderDetailDTO';
 import { OrderDTO } from 'src/app/dtos/OrderDTO';
 import { CartItemsResponse } from 'src/app/responses/CartItemResponse';
@@ -28,7 +29,8 @@ export class UserOrderComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private cartItemService: CartItemService,
     private orderService: OrderService,
-    private orderDetailService : OrderDetailService
+    private orderDetailService: OrderDetailService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -70,34 +72,32 @@ export class UserOrderComponent implements OnInit {
           debugger
           this.orderId = response.order_id;
           this.createOrderDetail();
+          this.router.navigate(['user/order-by-user-id/', this.userResponse?.id]);
         }, error(err) {
           alert(err);
         },
       })
-
     }
   }
 
   createOrderDetail() {
     this.selectCartItems.forEach((cartItem: CartItemsResponse) => {
+      debugger
       const orderDetailDTO: OrderDetailDTO = {
         "orderId": this.orderId,
         "productId": cartItem.product.product_response_id,
         "numberOfProducts": cartItem.quantity,
-        "totalMoney" : cartItem.product.price * cartItem.quantity
+        "totalMoney": cartItem.product.price * cartItem.quantity
       }
       debugger
       this.orderDetailService.createOrderDetail(orderDetailDTO).subscribe({
-        next : (response : any) => {
+        next: (response: any) => {
           debugger
           this.Success += 1;
-        },error(err) {
-            alert(err)
+        }, error(err) {
+          alert(err)
         },
       })
     });
-    alert("Cập nhật thành công ${this.Success}");
-
   }
-
 }

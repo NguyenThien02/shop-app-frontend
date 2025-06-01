@@ -10,27 +10,38 @@ import { LocalStorageService } from 'src/app/services/LocalStorageService';
 export class HeaderComponent {
 
   constructor(
-    private localStorageService : LocalStorageService,
-    private router : Router
-  ){}
+    private localStorageService: LocalStorageService,
+    private router: Router
+  ) { }
 
-  navigateHome(){
+  navigateHome() {
     debugger
-    if(this.localStorageService.getUserResponseFromLocalStorage().role.roleId == 1){
+    if (this.localStorageService.getUserResponseFromLocalStorage().role.roleId == 1) {
       this.router.navigate(['/user/home'])
     }
-    if(this.localStorageService.getUserResponseFromLocalStorage().role.roleId == 2){
+    if (this.localStorageService.getUserResponseFromLocalStorage().role.roleId == 2) {
       this.router.navigate(['/seller/home'])
     }
   }
-  
-  getCart(){
-    const cartId = this.localStorageService.getCartFromLocalStorage();
-  if (cartId) {
 
-    this.router.navigate(['/user/cart', cartId]);
-  } else {
-    console.warn('No cart ID found in local storage.');
+  getCart() {
+    const cartId = this.localStorageService.getCartFromLocalStorage();
+    if (cartId) {
+
+      this.router.navigate(['/user/cart', cartId]);
+    } else {
+      console.warn('No cart ID found in local storage.');
+    }
   }
+
+  getOrder() {
+    debugger
+    const user = this.localStorageService.getUserResponseFromLocalStorage();
+    if (user) {
+      const userId = user.id;
+      this.router.navigate(['user/order-by-user-id/', userId]);
+    } else {
+      console.warn('No user found in local storage.');
+    }
   }
 }

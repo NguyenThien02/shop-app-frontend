@@ -17,7 +17,9 @@ import { SellerHomeComponentComponent } from './components/seller-compenent/sell
 import { SellerCreateProductComponent } from './components/seller-compenent/seller-create-product/seller-create-product.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { UserCartComponent } from './components/user-component/user-cart/user-cart.component';
-import { UserOrderComponent } from './components/user-component/user-order-component/user-order.component';
+import { UserOrderComponent } from './components/user-component/user-create-order-component/user-order.component';
+import { UserGetOrderComponentComponent } from './components/user-component/user-get-order-component/user-get-order-component.component';
+import { UserGetOrderDetailComponentComponent } from './user-get-order-detail-component/user-get-order-detail-component.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { UserOrderComponent } from './components/user-component/user-order-compo
     SellerCreateProductComponent,
     ProductDetailComponent,
     UserCartComponent,
-    UserOrderComponent
+    UserOrderComponent,
+    UserGetOrderComponentComponent,
+    UserGetOrderDetailComponentComponent
   ],
   imports: [
     BrowserModule,

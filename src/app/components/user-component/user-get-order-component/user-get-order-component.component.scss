@@ -1,0 +1,83 @@
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-table th,
+.order-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-table th {
+    background: #f4f4f4;
+    font-weight: bold;
+    color: #333;
+}
+
+.order-table tr:hover {
+    background: #f9f9f9;
+}
+
+.order-table td {
+    color: #555;
+}
+
+
+// phân trang 
+.pagination {
+  display: flex;
+  /* Sử dụng flexbox */
+  justify-content: center;
+  /* Căn giữa các phần tử */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  margin-top: 20px;
+  padding: 10px 15px;
+
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #002fff;
+    /* Màu nền cho nút */
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ffffff;
+      /* Màu khi hover */
+    }
+
+    &.active {
+      background-color: #3efd5e;
+      /* Màu nền cho nút hiện tại */
+    }
+
+    &:disabled {
+      background-color: #e0e0e0;
+      /* Màu cho nút bị vô hiệu hóa */
+      color: #a0a0a0;
+      /* Màu chữ cho nút bị vô hiệu hóa */
+      cursor: not-allowed;
+      /* Thay đổi con trỏ khi không cho click */
+    }
+  }
+}
