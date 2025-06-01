@@ -22,6 +22,10 @@ export class OrderService {
       .set('page', page.toString())
       .set('limit', limit.toString());
 
-    return this.http.get(`${this.apiOrder}/${userId}`,{params});
+    return this.http.get(`${this.apiOrder}/by-user-id/${userId}`,{params});
+  }
+
+  getOrderById(orderId: number){
+    return this.http.get(`${this.apiOrder}/by-order-id/${orderId}`);
   }
 }

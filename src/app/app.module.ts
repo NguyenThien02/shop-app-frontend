@@ -19,7 +19,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { UserCartComponent } from './components/user-component/user-cart/user-cart.component';
 import { UserOrderComponent } from './components/user-component/user-create-order-component/user-order.component';
 import { UserGetOrderComponentComponent } from './components/user-component/user-get-order-component/user-get-order-component.component';
-import { UserGetOrderDetailComponentComponent } from './user-get-order-detail-component/user-get-order-detail-component.component';
+import { UserGetOrderDetailComponentComponent } from './components/user-component/user-get-order-detail-component/user-get-order-detail-component.component';
 
 @NgModule({
   declarations: [

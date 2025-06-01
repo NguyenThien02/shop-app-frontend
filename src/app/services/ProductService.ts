@@ -26,7 +26,6 @@ export class ProductService {
     }
 
     getFeaturedProduct(page : number, limit : number, categoryId : number){
-        debugger
         const params = new HttpParams()
             .set('page', page.toString())
             .set('limit', limit.toString())

@@ -13,6 +13,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { UserCartComponent } from './components/user-component/user-cart/user-cart.component';
 import { UserOrderComponent } from './components/user-component/user-create-order-component/user-order.component';
 import { UserGetOrderComponentComponent } from './components/user-component/user-get-order-component/user-get-order-component.component';
+import { UserGetOrderDetailComponentComponent } from './components/user-component/user-get-order-detail-component/user-get-order-detail-component.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
     {path: 'user/cart/:cart-id', component: UserCartComponent},
     {path: 'user/order', component: UserOrderComponent},
     {path: 'user/order-by-user-id/:user-id', component: UserGetOrderComponentComponent},
+    {path: 'user/get-order-detail/:order-id', component: UserGetOrderDetailComponentComponent},
 
     {path: 'seller/home', component: SellerHomeComponentComponent},
     {path: 'seller/create-product', component: SellerCreateProductComponent} 

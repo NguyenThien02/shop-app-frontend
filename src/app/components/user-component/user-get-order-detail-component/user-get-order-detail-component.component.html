@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<div class="order-detail-container">
+    <h1>Chi tiết đơn hàng</h1>
+    <div class="order-info" *ngIf="orderResponse">
+      <p><strong>Ngày đặt hàng: {{orderResponse.order_date | date:'dd/MM/yyyy' }}</strong> <span id="orderDate"></span></p>
+      <p><strong>Tổng tiền: {{orderResponse.total_amount | currency:'VND':'symbol':'1.0-0'}}</strong> <span id="totalAmount"></span></p>
+      <p><strong>Địa chỉ giao hàng: {{orderResponse.shipping_address}}</strong> <span id="shippingAddress"></span></p>
+    </div>
+    <div class="product-list">
+      <h2>Sản phẩm</h2>
+      <div class="product-item" *ngFor="let orderDetail of orderDetails">
+        <img id="productImage" [src]="orderDetail.productResponse.image_url" alt="Product Image">
+        <div class="product-details">
+          <p><strong>Tên sản phẩm: {{orderDetail.productResponse.product_name}}</strong> <span id="productName"></span></p>
+          <p><strong>Giá: {{orderDetail.productResponse.price | currency:'VND':'symbol':'1.0-0'}}</strong> <span id="price"></span></p>
+          <p><strong>Số lượng: {{orderDetail.numberOfProducts}}</strong> <span id="numberOfProducts"></span></p>
+        </div>
+      </div>
+          <div class="pagination">
+        <button (click)="changePage(page - 1)" [disabled]="page === 0">Trước</button>
+        <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1 }}</button>
+        <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Tiếp</button>
+    </div>
+    </div>
+  </div>

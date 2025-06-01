@@ -1,7 +1,7 @@
 import { UserResponse } from "./UserResponse";
 
 export interface OrderResponse {
-    id : number
+    order_id : number
     user_response : UserResponse;
     order_date : Date;
     total_amount : number;

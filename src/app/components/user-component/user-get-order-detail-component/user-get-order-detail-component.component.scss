@@ -1,0 +1,121 @@
+// order-detail.scss
+.order-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.order-info {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.order-info p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.order-info strong {
+  color: #555;
+}
+
+.product-list {
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.product-list h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.product-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.product-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.product-details p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.product-details strong {
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .product-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-item img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
+// phân trang 
+.pagination {
+  display: flex;
+  /* Sử dụng flexbox */
+  justify-content: center;
+  /* Căn giữa các phần tử */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  margin-top: 20px;
+  padding: 10px 15px;
+
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #002fff;
+    /* Màu nền cho nút */
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ffffff;
+      /* Màu khi hover */
+    }
+
+    &.active {
+      background-color: #3efd5e;
+      /* Màu nền cho nút hiện tại */
+    }
+
+    &:disabled {
+      background-color: #e0e0e0;
+      /* Màu cho nút bị vô hiệu hóa */
+      color: #a0a0a0;
+      /* Màu chữ cho nút bị vô hiệu hóa */
+      cursor: not-allowed;
+      /* Thay đổi con trỏ khi không cho click */
+    }
+  }
+}
