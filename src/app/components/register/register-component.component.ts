@@ -38,7 +38,7 @@ export class RegisterComponentComponent implements OnInit{
         this.roles = roles;
       },
       error: (error: any) => {
-        console.error('Error:', error);
+        alert(error.error);
       }
     });
   }
@@ -48,7 +48,7 @@ export class RegisterComponentComponent implements OnInit{
       "full_name": this.fullName,
       "phone_number": this.phoneNumber,
       "password": this.password,
-      "retype_password": this.password,
+      "retype_password": this.retypePassword,
       "birthday": this.birthday,
       "address": this.address,
       "role_id": this.selectedRole?.roleId ?? 1
@@ -58,7 +58,7 @@ export class RegisterComponentComponent implements OnInit{
         this.router.navigate(['/login']);
       },
       error: (error: any) => {
-        console.error('Error:', error);
+        alert(error.error);
       }
     })
   }

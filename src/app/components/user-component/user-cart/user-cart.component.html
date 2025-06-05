@@ -7,6 +7,7 @@
             <tr>
                 <th class="sub-header">STT</th>
                 <th class="sub-header">Tên sản phẩm</th>
+                <th class="sub-header">Tên shop</th>
                 <th class="sub-header">Số lượng đã chọn</th>
                 <th class="sub-header">Tổng giá</th>
                 <th></th>
@@ -16,10 +17,11 @@
             <tr *ngFor="let cartItem of cartItems; let i = index">
                 <td>{{(page * 10) + (i + 1)}}</td>
                 <td>{{ cartItem.product.product_name }}</td>
+                <td>{{ cartItem.product.seller_respone.full_name}}</td>
                 <td>{{ cartItem.quantity }}</td>
                 <td>{{ cartItem.quantity * cartItem.product.price | currency:'VND':'symbol':'1.0-0' }}</td>
                 <td class="action-buttons">
-                    <button class="add-button" (click)="addCartItems(cartItem.cart_item_id)">Đặt hàng</button>
+                    <button class="add-button" (click)="addCartItems(cartItem.cart_item_id, cartItem.product.seller_respone.id)">Đặt hàng</button>
                     <button class="delete-button" (click)="deleteCartItemById(cartItem.cart_item_id)">Xóa</button>
                 </td>
             </tr>
@@ -33,12 +35,13 @@
 
     <hr class="section-divider">
     <div class="form-section">
-        <h2 class="section-title">Danh sách dịch vụ y tế đã chọn</h2>
+        <h2 class="section-title">Danh sách sản phẩm đặt hàng</h2>
         <table class="pricing-table">
             <thead>
                 <tr>
                     <th class="sub-header">STT</th>
                     <th class="sub-header">Tên sản phẩm</th>
+                    <th class="sub-header">Tên shop</th>
                     <th class="sub-header">Số lượng đã chọn</th>
                     <th class="sub-header">Tổng giá</th>
                     <th></th>
@@ -48,6 +51,7 @@
                 <tr *ngFor="let selectcartItem of selectCartItems; let i = index">
                     <td>{{(page * 10) + (i + 1)}}</td>
                     <td>{{ selectcartItem.product.product_name }}</td>
+                    <td>{{ selectcartItem.product.seller_respone.full_name}}</td>
                     <td>{{ selectcartItem.quantity }}</td>
                     <td>{{ selectcartItem.quantity * selectcartItem.product.price | currency:'VND':'symbol':'1.0-0' }}
                     </td>

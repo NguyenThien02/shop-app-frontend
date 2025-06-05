@@ -23,7 +23,7 @@ export class UserGetOrderComponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserId();
-    this.getOrderByUserId();
+    this.getOrderByUserId(this.page);
   }
 
   getUserId() {
@@ -33,8 +33,8 @@ export class UserGetOrderComponentComponent implements OnInit {
     }
   }
 
-  getOrderByUserId() {
-    this.orderService.getOrderByUserId(this.userId, this.page, this.limit).subscribe({
+  getOrderByUserId(page: number) {
+    this.orderService.getOrderByUserId(this.userId, page, this.limit).subscribe({
       next: (response: any) => {
         debugger
         this.orders = response.orderResponses;
@@ -47,6 +47,7 @@ export class UserGetOrderComponentComponent implements OnInit {
   }
 
   changePage(page: number){
-
+    this.getOrderByUserId(page);
+    this.page = page;
   }
 }

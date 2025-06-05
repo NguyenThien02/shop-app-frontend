@@ -21,12 +21,11 @@
                 <td>{{order.payment_status}}</td>
                 <td>{{order.notes}}</td>
             </tr>
-            <!-- Thêm các dòng khác nếu cần -->
         </tbody>
     </table>
     <div class="pagination">
         <button (click)="changePage(page - 1)" [disabled]="page === 0">Trước</button>
         <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1 }}</button>
-        <button (click)="changePage(page + 1)" [disabled]="page ===  - 1">Tiếp</button>
+        <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Tiếp</button>
     </div>
 </div>

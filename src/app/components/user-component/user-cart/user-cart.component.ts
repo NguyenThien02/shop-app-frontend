@@ -74,23 +74,21 @@ export class UserCartComponent implements OnInit {
     }
   }
 
-  changePage(page: number) {
-    if (page >= 0 && page < this.totalPages) {
-      this.page = page;
-      this.getAllCartItemByCartId(this.page, this.limit);
+  addCartItems(selectCartItemId: number, selectSellerId: number) {
+    debugger
+    if (this.selectCartItemsIds.includes(selectCartItemId)) {
+      alert("Sản phẩm đã có trong đơn đặt hàng");
+      return;
     }
-  }
-
-  addCartItems(selectCartItemId: number) {
-    const confirmed = confirm('Bạn có chắc chắn muốn chọn dịch vụ này');
-    if (confirmed) {
+    const isSellerExist = this.selectCartItems.some(item => item.product.seller_respone.id !== selectSellerId);
+    if (isSellerExist &&  Array.isArray(this.selectCartItems)){
       debugger
-      if(!this.selectCartItemsIds.includes(selectCartItemId)){
-        this.selectCartItemsIds.push(selectCartItemId);
-      }
-      this.localStorageService.setCartItemsToLocalStorage(this.selectCartItemsIds);
-      this.getSelectCartItems();
+      alert("Vui lòng chọn đúng người bán trong đơn hàng đã chọn");
+      return;
     }
+    this.selectCartItemsIds.push(selectCartItemId);
+    this.localStorageService.setCartItemsToLocalStorage(this.selectCartItemsIds);
+    this.getSelectCartItems();
   }
 
   getSelectCartItems() {
@@ -100,8 +98,8 @@ export class UserCartComponent implements OnInit {
       next: (response: any) => {
         debugger
         this.selectCartItems = response;
-        this.selectCartItems.forEach((cartItem : CartItemsResponse) => {
-            this.totalAmount += cartItem.product.price * cartItem.quantity;
+        this.selectCartItems.forEach((cartItem: CartItemsResponse) => {
+          this.totalAmount += cartItem.product.price * cartItem.quantity;
         });
       }, error(err) {
         alert(err);
@@ -119,8 +117,12 @@ export class UserCartComponent implements OnInit {
     this.getSelectCartItems();
   }
 
-  createOrder() {
-
+  changePage(page: number) {
+    if (page >= 0 && page < this.totalPages) {
+      this.page = page;
+      this.getAllCartItemByCartId(this.page, this.limit);
+    }
   }
+
 
 }

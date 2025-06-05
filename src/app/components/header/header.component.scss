@@ -6,7 +6,7 @@ $border-light: #ddd;
 
 .header {
   background-color: $header-bg;
-  padding: 15px 0;
+  padding: 10px 0;
   border-bottom: 1px solid $border-light;
 
   .container {
@@ -33,9 +33,11 @@ $border-light: #ddd;
 
     li {
       margin-left: 20px;
+
       a {
         color: $text-color;
         text-decoration: none;
+
         &:hover {
           color: $primary-color;
         }
@@ -43,25 +45,86 @@ $border-light: #ddd;
     }
   }
 
-  .user-actions {
-    .btn {
-      padding: 8px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-
-      &-primary {
-        background-color: $primary-color;
-        color: $white;
-        &:hover { background-color: darken($primary-color, 10%); }
-      }
-
-      &-secondary {
-        background-color: #6c757d; // Secondary color directly
-        color: $white;
-        margin-left: 10px;
-        &:hover { background-color: darken(#6c757d, 10%); }
-      }
-    }
+  .user-menu {
+    position: relative;
+    cursor: pointer;
   }
+
+  .user-name {
+    color: blue;
+    /* Đổi màu chữ thành xanh */
+    font-weight: bold;
+    /* Làm cho chữ đậm hơn */
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+  }
+
+  .dropdown-item {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    display: block;
+  }
+
+  .dropdown-item:hover {
+    background-color: #f1f1f1;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    /* Màu xanh dương */
+    color: white;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    /* Hiệu ứng phóng to nhẹ */
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    /* Màu xám */
+    color: white;
+    border: none;
+  }
+
+  .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+    /* Hiệu ứng phóng to nhẹ */
+  }
+
+  /* Căn chỉnh nút */
+  .user-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
 }

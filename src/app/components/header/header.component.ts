@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserResponse } from 'src/app/responses/UserResponse';
 import { LocalStorageService } from 'src/app/services/LocalStorageService';
 
 @Component({
@@ -7,12 +8,23 @@ import { LocalStorageService } from 'src/app/services/LocalStorageService';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
+
+  user?: UserResponse;
+  isMenuOpen = false;
 
   constructor(
     private localStorageService: LocalStorageService,
     private router: Router
   ) { }
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser(){
+    this.user = this.localStorageService.getUserResponseFromLocalStorage();
+  }
 
   navigateHome() {
     debugger
@@ -44,4 +56,18 @@ export class HeaderComponent {
       console.warn('No user found in local storage.');
     }
   }
+
+  toggleMenu(){
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  logout() {
+  const confirmLogout = window.confirm("Bạn có chắc chắn muốn đăng xuất?");
+  if (confirmLogout) {
+    localStorage.clear();
+    window.location.reload();
+    this.router.navigate(['/']);
+  }
+}
+
 }

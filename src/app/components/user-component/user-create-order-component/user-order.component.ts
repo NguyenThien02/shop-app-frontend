@@ -17,13 +17,14 @@ import { OrderService } from 'src/app/services/OrderService';
 })
 export class UserOrderComponent implements OnInit {
   userResponse?: UserResponse;
+  sellerId: number = 0;
   shippingAddres: string = "";
   totalAmount: number = 0;
   notes: string = "";
   selectCartItemsIds: number[] = [];
   selectCartItems: CartItemsResponse[] = [];
   orderId: number = 0;
-  Success: number = 0;
+  message: string = "";
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -52,8 +53,12 @@ export class UserOrderComponent implements OnInit {
         this.selectCartItems.forEach((cartItem: CartItemsResponse) => {
           this.totalAmount += cartItem.product.price * cartItem.quantity;
         });
-      }, error(err) {
-        alert(err);
+      }, 
+      complete: () => {
+        this.sellerId = this.selectCartItems[0].product.seller_respone.id;
+      }, 
+      error(error: any) {
+        alert(error.error);
       },
     })
   }
@@ -63,6 +68,7 @@ export class UserOrderComponent implements OnInit {
       debugger
       const orderDTO: OrderDTO = {
         "user_id": this.userResponse.id,
+        "seller_id": this.sellerId,
         "shipping_addres": this.shippingAddres,
         "total_amount": this.totalAmount,
         "notes": this.notes
@@ -72,7 +78,6 @@ export class UserOrderComponent implements OnInit {
           debugger
           this.orderId = response.order_id;
           this.createOrderDetail();
-          this.router.navigate(['user/order-by-user-id/', this.userResponse?.id]);
         }, error(err) {
           alert(err);
         },
@@ -82,7 +87,6 @@ export class UserOrderComponent implements OnInit {
 
   createOrderDetail() {
     this.selectCartItems.forEach((cartItem: CartItemsResponse) => {
-      debugger
       const orderDetailDTO: OrderDetailDTO = {
         "orderId": this.orderId,
         "productId": cartItem.product.product_response_id,
@@ -93,11 +97,13 @@ export class UserOrderComponent implements OnInit {
       this.orderDetailService.createOrderDetail(orderDetailDTO).subscribe({
         next: (response: any) => {
           debugger
-          this.Success += 1;
+          this.message = response.message;
         }, error(err) {
           alert(err)
         },
       })
     });
+    alert(`${this.message}`);
+    this.router.navigate(['user/order-by-user-id/', this.userResponse?.id]);
   }
 }
