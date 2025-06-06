@@ -1,25 +1,69 @@
-<div class="sidebar">
-    <div class="profile">
-        <img src="assets/seller.jpeg" alt="avatar" class="profile-img">
-        <p class="profile-name">{{ userResponse?.full_name }}</p>
-        <p *ngIf="userResponse?.id" class="profile-name">USER ID: {{ userResponse?.id }}</p> 
+<div class="flex items-center justify-between px-6 h-16">
+  <div class="flex items-center justify-center h-16 border-b">
+    <h1 class="text-2xl font-['Pacifico'] text-primary">NPT</h1>
+  </div>
+  <!-- Search bar -->
+  <div class="flex-1 max-w-xl ml-6">
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+          <i class="ri-search-line"></i>
+        </div>
+      </div>
+      <input type="text"
+        class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-button text-sm placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+        placeholder="Tìm kiếm...">
     </div>
-    <ul class="menu">
-        <li [class.active]="isActive('home')">
-            <a routerLink="/seller/home">Thông tin người bán</a>
-        </li>
-        <li [class.active]="isActive('update-user')">
-            <a routerLink="/">Chỉnh sửa thông tin</a>
-        </li>
-        
-        <li  [class.active]="isActive('create-product')">
-            <a routerLink="/seller/create-product">Thêm sản phẩm</a>
-        </li>
-        <li  [class.active]="isActive('get-schedule')">
-            <a routerLink="/">Doanh thu</a>
-        </li>
-        <li class="logout" (click)="confirmLogout()"> 
-            <a href="javascript:void(0)">Đăng xuất</a>
-        </li>
-    </ul>
+  </div>
+  <!-- Right side icons -->
+  <div class="flex items-center space-x-4">
+    <!-- Notifications -->
+    <div class="relative">
+      <button id="notificationButton"
+        class="w-10 h-10 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 focus:outline-none !rounded-button">
+        <div class="w-5 h-5 flex items-center justify-center">
+          <i class="ri-notification-3-line"></i>
+        </div>
+        <span
+          class="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+      </button>
+      <div id="notificationMenu"
+        class="hidden absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+        <div class="p-4 border-b border-gray-100">
+          <h3 class="font-medium text-gray-700">Thông báo</h3>
+        </div>
+        <div class="max-h-96 overflow-y-auto custom-scrollbar">
+        </div>
+        <div class="p-4 border-t border-gray-100">
+          <a href="#" class="block text-center text-sm text-primary hover:text-primary/80">Xem tất cả thông
+            báo</a>
+        </div>
+      </div>
+    </div>
+    <!-- User profile -->
+    <div class="relative">
+      <button id="userMenuButton" class="flex items-center space-x-2 focus:outline-none" (click)="toggleUserMenu()">
+        <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-sm">
+          <span>NT</span>
+        </div>
+        <div class="hidden md:block text-left">
+          <p class="text-sm font-medium text-gray-700">{{userResponse?.full_name}}</p>
+          <p class="text-xs text-gray-500">{{userResponse?.role?.name}}</p>
+        </div>
+        <div class="w-5 h-5 flex items-center justify-center text-gray-400">
+          <i class="ri-arrow-down-s-line" *ngIf="!isUserMenuOpen"></i>
+          <i class="ri-arrow-up-s-line" *ngIf="isUserMenuOpen"></i>
+        </div>
+      </button>
+
+      <div id="userMenu"
+        class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20 border border-gray-100"
+        [class.hidden]="!isUserMenuOpen"> <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hồ
+          sơ</a>
+        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Cài đặt</a>
+        <div class="border-t border-gray-100"></div>
+        <a href="#" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100" (click)="logout()">Đăng xuất</a>
+      </div>
+    </div>
+  </div>
 </div>

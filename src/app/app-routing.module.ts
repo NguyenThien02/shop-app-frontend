@@ -14,6 +14,7 @@ import { UserCartComponent } from './components/user-component/user-cart/user-ca
 import { UserOrderComponent } from './components/user-component/user-create-order-component/user-order.component';
 import { UserGetOrderComponentComponent } from './components/user-component/user-get-order-component/user-get-order-component.component';
 import { UserGetOrderDetailComponentComponent } from './components/user-component/user-get-order-detail-component/user-get-order-detail-component.component';
+import { OrderManagementComponentComponent } from './components/seller-compenent/order-management-component/order-management-component.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
     {path: 'user/get-order-detail/:order-id', component: UserGetOrderDetailComponentComponent},
 
     {path: 'seller/home', component: SellerHomeComponentComponent},
-    {path: 'seller/create-product', component: SellerCreateProductComponent} 
+    {path: 'seller/create-product', component: SellerCreateProductComponent},
+    {path: 'seller/order-management', component: OrderManagementComponentComponent} 
 ]
 
 @NgModule({

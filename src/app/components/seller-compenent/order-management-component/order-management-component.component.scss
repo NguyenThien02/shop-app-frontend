@@ -1,0 +1,119 @@
+.text-2xl {
+    font-size: 30px;
+    padding-left: 20px;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-weight: normal;
+}
+
+.px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.h-16 {
+    height: 4rem;
+}
+
+.flex {
+    display: flex;
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+
+.relative {
+    position: relative
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    unicode-bidi: isolate;
+}
+
+.p-6 {
+    padding: 1.5rem;
+}
+.overflow-y-auto {
+    overflow-y: auto;
+}
+.flex-1 {
+    flex: 1 1 0%;
+}
+
+// Các styles cho chấm trạng thái
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.status-pending { background-color: orange; }
+.status-processing { background-color: blue; }
+.status-shipping { background-color: purple; }
+.status-delivered { background-color: green; }
+.status-cancelled { background-color: red; }
+
+
+// phân trang 
+.pagination {
+  display: flex;
+  /* Sử dụng flexbox */
+  justify-content: center;
+  /* Căn giữa các phần tử */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  margin-top: 20px;
+  padding: 10px 15px;
+
+  button {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #002fff;
+    /* Màu nền cho nút */
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ffffff;
+      /* Màu khi hover */
+    }
+
+    &.active {
+      background-color: #3efd5e;
+      /* Màu nền cho nút hiện tại */
+    }
+
+    &:disabled {
+      background-color: #e0e0e0;
+      /* Màu cho nút bị vô hiệu hóa */
+      color: #a0a0a0;
+      /* Màu chữ cho nút bị vô hiệu hóa */
+      cursor: not-allowed;
+      /* Thay đổi con trỏ khi không cho click */
+    }
+  }
+}

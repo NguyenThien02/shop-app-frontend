@@ -1,100 +1,64 @@
-.sidebar {
-    width: 250px;
-    background-color: #ffffff;
-    padding: 20px;
-    border-right: 1px solid #ddd;
-    min-height: 100vh;
-  
-    .profile {
-      text-align: center;
-      margin-bottom: 20px;
-  
-      .profile-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 10px;
-        border: 3px solid #ddd;
-      }
-  
-      .profile-name {
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 5px;
-  
-        &:last-child {
-          font-size: 14px;
-          color: #777;
-        }
-      }
-    }
-  
-    .menu {
-      list-style-type: none;
-      padding: 0;
-  
-      li {
-        margin: 10px 0;
-  
-        a {
-          text-decoration: none;
-          color: #333;
-          font-size: 16px;
-          padding: 10px 15px;
-          display: block;
-          border-radius: 5px;
-          transition: background-color 0.3s ease;
-  
-          &:hover {
-            background-color: #eaeaea;
-          }
-  
-          &.active {
-            background-color: #007bff;
-            color: white;
-            font-weight: bold;
-          }
-        }
-  
-        &.active a {
-          background-color: #007bff;
-          color: white;
-        }
-      }
-    }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+  .logo a {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
   }
-  
-  @media screen and (max-width: 768px) {
-    .sidebar {
-      width: 100%;
-      border-right: none;
-      min-height: auto;
-      padding: 10px;
-  
-      .profile {
-        .profile-img {
-          width: 80px;
-          height: 80px;
-        }
-        .profile-name {
-          font-size: 16px;
-        }
-      }
-  
-      .menu {
-        li {
-          a {
-            font-size: 14px;
-            padding: 8px 10px;
-          }
-        }
-      }
-      .logout a {
-        font-size: 14px;
-        padding: 8px 10px;
-      }
-    }
-  }
-  
+
+header input {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  width: 200px;
+}
+
+header .relative {
+  position: relative;
+}
+
+header .absolute {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+header .bg-red-500 {
+  background-color: #ef4444;
+}
+
+header .bg-purple-500 {
+  background-color: #a855f7;
+}
+
+header span {
+  color: #001aff;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+header .flex {
+  display: flex;
+  align-items: center;
+}
+
+header .space-x-4 > * {
+  margin-left: 1rem;
+}
+
+header .mr-2 {
+  margin-right: 0.5rem;
+}
+
+header .ml-2 {
+  margin-left: 0.5rem;
+}

@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/UserService';
 })
 export class SellerHeaderCompenentComponent implements OnInit {
   userResponse?: UserResponse;
+  isUserMenuOpen: Boolean = false;
 
   constructor(
     private userService: UserService,
@@ -31,15 +32,16 @@ export class SellerHeaderCompenentComponent implements OnInit {
     return this.router.url.includes(route);
   }
 
-  confirmLogout() {
-    const confirmed = confirm('Bạn có chắc chắn muốn đăng xuất không?');
-    if (confirmed) {
-      this.outlog();
+  logout() {
+    const confirmLogout = window.confirm("Bạn có chắc chắn muốn đăng xuất?");
+    debugger
+    if (confirmLogout) {
+      localStorage.clear();
+      this.router.navigate(['/']);
     }
   }
 
-  outlog(){
-    localStorage.clear();
-    this.router.navigate(['/']);
+  toggleUserMenu() {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 }

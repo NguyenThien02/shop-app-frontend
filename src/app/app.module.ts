@@ -20,6 +20,8 @@ import { UserCartComponent } from './components/user-component/user-cart/user-ca
 import { UserOrderComponent } from './components/user-component/user-create-order-component/user-order.component';
 import { UserGetOrderComponentComponent } from './components/user-component/user-get-order-component/user-get-order-component.component';
 import { UserGetOrderDetailComponentComponent } from './components/user-component/user-get-order-detail-component/user-get-order-detail-component.component';
+import { SellerSelectServiceComponent } from './components/seller-compenent/seller-select-service/seller-select-service.component';
+import { OrderManagementComponentComponent } from './components/seller-compenent/order-management-component/order-management-component.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { UserGetOrderDetailComponentComponent } from './components/user-componen
     UserCartComponent,
     UserOrderComponent,
     UserGetOrderComponentComponent,
-    UserGetOrderDetailComponentComponent
+    UserGetOrderDetailComponentComponent,
+    SellerSelectServiceComponent,
+    OrderManagementComponentComponent,
   ],
   imports: [
     BrowserModule,

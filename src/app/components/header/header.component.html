@@ -1,7 +1,8 @@
+
 <header class="header">
     <div class="container">
-        <div class="logo">
-            <a href="#">ShopHub</a>
+        <div class="flex items-center justify-center h-16 border-b">
+            <h1 class="text-2xl font-['Pacifico'] text-primary">NPT</h1>
         </div>
         <nav class="main-nav">
             <ul>
@@ -10,19 +11,19 @@
                 <li><a (click)="getOrder()">Đơn hàng</a></li>
             </ul>
         </nav>
-            <ng-container *ngIf="user; else guestTemplate">
-                <div class="user-menu" (click)="toggleMenu()">
-                    <span class="user-name">Xin chào, {{ user.full_name }}</span>
-                    <div class="dropdown-menu" *ngIf="isMenuOpen">
-                        <a class="dropdown-item">Hồ sơ cá nhân</a>
-                        <a class="dropdown-item">Cài đặt</a>
-                        <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
-                    </div>
+        <ng-container *ngIf="user; else guestTemplate">
+            <div class="user-menu" (click)="toggleMenu()">
+                <span class="user-name">Xin chào, {{ user.full_name }}</span>
+                <div class="dropdown-menu" *ngIf="isMenuOpen">
+                    <a class="dropdown-item">Hồ sơ cá nhân</a>
+                    <a class="dropdown-item">Cài đặt</a>
+                    <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
                 </div>
-            </ng-container>
+            </div>
+        </ng-container>
 
-            <ng-template #guestTemplate>
-                <a class="btn btn-primary" routerLink="/login">Đăng nhập</a>
-            </ng-template>
+        <ng-template #guestTemplate>
+            <a class="btn btn-primary" routerLink="/login">Đăng nhập</a>
+        </ng-template>
     </div>
 </header>

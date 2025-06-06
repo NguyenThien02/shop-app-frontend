@@ -1,0 +1,16 @@
+.menu {
+  li {
+    &.active {
+      a.sidebar-link {
+        background-color: theme('colors.primary');
+        color: theme('colors.white');
+        font-weight: bold;
+
+        &:hover {
+          background-color: theme('colors.primary');
+          color: theme('colors.white');
+        }
+      }
+    }
+  }
+}
