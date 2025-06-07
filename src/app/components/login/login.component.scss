@@ -8,6 +8,24 @@ $primary-color: #007bff;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .btn-submit {
+    &:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+  }
 }
 
 h2 {

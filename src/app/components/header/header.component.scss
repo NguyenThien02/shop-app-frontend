@@ -7,9 +7,9 @@
     top: 0;
     z-index: $z-index-sticky;
 
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
         padding: 0 $spacing-md;
     }
 
@@ -18,12 +18,12 @@
         align-items: center;
         justify-content: space-between;
         height: 70px;
-    }
+  }
 
     .logo {
         h1 {
             font-size: $font-size-2xl;
-            color: $primary-color;
+    color: $primary-color;
             margin: 0;
             transition: $transition-base;
 
@@ -31,41 +31,41 @@
                 transform: scale(1.05);
             }
         }
-    }
+  }
 
     .main-nav {
         ul {
             display: flex;
             gap: $spacing-lg;
-            margin: 0;
-            padding: 0;
+    margin: 0;
+    padding: 0;
             list-style: none;
         }
 
         .nav-link {
-            color: $text-color;
-            text-decoration: none;
+        color: $text-color;
+        text-decoration: none;
             font-weight: $font-weight-medium;
             padding: $spacing-sm $spacing-md;
             border-radius: $border-radius;
             transition: $transition-base;
 
-            &:hover {
-                color: $primary-color;
+        &:hover {
+          color: $primary-color;
                 background-color: rgba($primary-color, 0.1);
-            }
         }
+      }
     }
 
     .header-actions {
         display: flex;
         align-items: center;
         gap: $spacing-md;
-    }
+  }
 
-    .user-menu {
-        position: relative;
-        cursor: pointer;
+  .user-menu {
+    position: relative;
+    cursor: pointer;
 
         .user-info {
             display: flex;
@@ -90,9 +90,9 @@
             border-radius: 50%;
             color: $primary-color;
             font-size: $font-size-lg;
-        }
+  }
 
-        .user-name {
+  .user-name {
             color: $text-color;
             font-weight: $font-weight-medium;
         }
@@ -106,10 +106,10 @@
                 transform: rotate(180deg);
             }
         }
-    }
+  }
 
-    .dropdown-menu {
-        position: absolute;
+  .dropdown-menu {
+    position: absolute;
         top: 100%;
         right: 0;
         margin-top: $spacing-sm;
@@ -129,22 +129,22 @@
             visibility: visible;
             transform: translateY(0);
         }
-    }
+  }
 
-    .dropdown-item {
+  .dropdown-item {
         display: flex;
         align-items: center;
         gap: $spacing-sm;
         padding: $spacing-sm $spacing-md;
         color: $text-color;
-        text-decoration: none;
+    text-decoration: none;
         transition: $transition-base;
         cursor: pointer;
 
         i {
             width: 20px;
             color: $text-color;
-        }
+  }
 
         &:hover {
             background-color: rgba($primary-color, 0.1);
@@ -160,26 +160,26 @@
         height: 1px;
         background-color: $border-color;
         margin: $spacing-xs 0;
-    }
+  }
 
-    .btn {
+  .btn {
         display: inline-flex;
         align-items: center;
         gap: $spacing-sm;
         padding: $spacing-sm $spacing-lg;
         border-radius: $border-radius;
         font-weight: $font-weight-medium;
-        text-decoration: none;
+    text-decoration: none;
         transition: $transition-base;
 
         i {
             font-size: $font-size-base;
         }
-    }
+  }
 
-    .btn-primary {
+  .btn-primary {
         background-color: $primary-color;
-        color: white;
+    color: white;
 
         &:hover {
             background-color: darken($primary-color, 10%);
@@ -193,7 +193,7 @@
     .header {
         .header-main {
             height: 60px;
-        }
+  }
 
         .main-nav {
             display: none;

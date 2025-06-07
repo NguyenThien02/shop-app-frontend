@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Route, Router } from '@angular/router';
-import { count } from 'rxjs';
+import { Router } from '@angular/router';
 import { LoginDTO } from 'src/app/dtos/LoginDTO';
 import { CartService } from 'src/app/services/CartService';
 import { LocalStorageService } from 'src/app/services/LocalStorageService';

@@ -1,20 +1,77 @@
 <app-header></app-header>
 <div class="login-container">
-    <h2>Đăng nhập tài khoản</h2>
-    <form class="login-form">
-        <div class="form-group">
-            <h4>Số điện thoại:</h4>
-            <input type="text" name="phoneNumber" [(ngModel)]="phoneNumber" required>
-        </div>
-        <div class="form-group">
-            <h4>Mật khẩu:</h4>
-            <input type="password" name="password" [(ngModel)]="password" required>
-        </div>
-
-        <button class="btn-submit" (click)="login()">Đăng nhập</button>
-
-        <p class="register-link">
-            Chưa có tài khoản? <a routerLink="/register">Đăng ký ngay</a>
+  <h2>Đăng nhập tài khoản</h2>
+  <form #loginForm="ngForm" class="login-form">
+    <div class="form-group">
+      <h4>Số điện thoại:</h4>
+      <input
+        type="text"
+        name="phoneNumber"
+        [(ngModel)]="phoneNumber"
+        #phoneNumberInput="ngModel"
+        required
+        minlength="10"
+        maxlength="11"
+        pattern="^0[0-9]{9}$"
+      />
+      <div
+        class="error-message"
+        *ngIf="phoneNumberInput.touched && phoneNumberInput.invalid"
+      >
+        <p *ngIf="phoneNumberInput.errors?.['required']">
+          Số điện thoại là bắt buộc
         </p>
-    </form>
+        <p *ngIf="phoneNumberInput.errors?.['minlength']">
+          Số điện thoại phải có ít nhất 10 chữ số
+        </p>
+        <p *ngIf="phoneNumberInput.errors?.['maxlength']">
+          Số điện thoại không được vượt quá 11 chữ số
+        </p>
+        <p *ngIf="phoneNumberInput.errors?.['pattern']">
+          Số điện thoại phải bắt đầu bằng 0
+        </p>
+      </div>
+    </div>
+    <div class="form-group">
+      <h4>Mật khẩu:</h4>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        #passwordInput="ngModel"
+        required
+        minlength="6"
+        maxlength="16"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,16}$"
+      />
+      <div
+        class="error-message"
+        *ngIf="passwordInput.touched && passwordInput.invalid"
+      >
+        <p *ngIf="passwordInput.errors?.['required']">Mật khẩu là bắt buộc</p>
+        <p *ngIf="passwordInput.errors?.['minlength']">
+          Mật khẩu phải có ít nhất 6 ký tự
+        </p>
+        <p *ngIf="passwordInput.errors?.['maxlength']">
+          Mật khẩu không được vượt quá 16 ký tự
+        </p>
+        <p *ngIf="passwordInput.errors?.['pattern']">
+          Mật khẩu phải có ít nhất 1 chữ cái viết hoa, 1 chữ cái viết thường, 1
+          số và 1 ký tự đặc biệt
+        </p>
+      </div>
+    </div>
+
+    <button
+      class="btn-submit"
+      (click)="login()"
+      [disabled]="!loginForm.form.valid"
+    >
+      Đăng nhập
+    </button>
+
+    <p class="register-link">
+      Chưa có tài khoản? <a routerLink="/register">Đăng ký ngay</a>
+    </p>
+  </form>
 </div>

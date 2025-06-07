@@ -1,32 +1,130 @@
 <app-header></app-header>
 <div class="main-block">
   <h1>Đăng ký</h1>
-  <form action="/">
-    <label id="icon" for="name"><i class="fa-solid fa-phone"></i></label>
-    <input type="text" name="name" id="name" placeholder="Số điện thoại" required [(ngModel)]="phoneNumber" />
-    <label id="icon" for="name"><i class="fas fa-user"></i></label>
-    <input type="text" name="name" id="name" placeholder="Họ và Tên" required [(ngModel)]="fullName" />
-    <label id="icon" for="name"><i class="fas fa-unlock-alt"></i></label>
-    <input type="password" name="name" id="name" placeholder="Mật khẩu" required [(ngModel)]="password" />
-    <label id="icon" for="name"><i class="fas fa-unlock-alt"></i></label>
-    <input type="password" name="name" id="name" placeholder="Nhập lại mật khẩu" required [(ngModel)]="retypePassword" />
-    <label id="icon" for="name"><i class="fa-solid fa-location-dot"></i></label>
-    <input type="text" name="name" id="name" placeholder="Địa chỉ" required [(ngModel)]="address" />
-    <label id="icon" for="dateOfBirth"><i class="fa-solid fa-cake-candles"></i></label>
-    <input type="date" name="dateOfBirth" id="dateOfBirth" required [(ngModel)]="birthday" z/>
-    <hr>
+  <form [formGroup]="registerForm">
+    <label id="icon"><i class="fa-solid fa-phone"></i></label>
+    <input
+      type="text"
+      formControlName="phoneNumber"
+      placeholder="Số điện thoại"
+    />
+    <div
+      class="error-message"
+      *ngIf="
+        registerForm.get('phoneNumber')?.touched &&
+        registerForm.get('phoneNumber')?.invalid
+      "
+    >
+      <p *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">
+        Số điện thoại là bắt buộc
+      </p>
+      <p *ngIf="registerForm.get('phoneNumber')?.errors?.['minlength']">
+        Số điện thoại phải có ít nhất 10 chữ số
+      </p>
+      <p *ngIf="registerForm.get('phoneNumber')?.errors?.['maxlength']">
+        Số điện thoại không được vượt quá 11 chữ số
+      </p>
+      <p *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">
+        Số điện thoại phải bắt đầu bằng 0
+      </p>
+    </div>
+
+    <label id="icon"><i class="fas fa-user"></i></label>
+    <input type="text" formControlName="fullName" placeholder="Họ và Tên" />
+    <div
+      class="error-message"
+      *ngIf="
+        registerForm.get('fullName')?.touched &&
+        registerForm.get('fullName')?.invalid
+      "
+    >
+      <p *ngIf="registerForm.get('fullName')?.errors?.['required']">
+        Họ và tên là bắt buộc
+      </p>
+      <p *ngIf="registerForm.get('fullName')?.errors?.['maxlength']">
+        Họ và tên không được vượt quá 20 ký tự
+      </p>
+      <p *ngIf="registerForm.get('fullName')?.errors?.['pattern']">
+        Họ và tên chỉ được chứa chữ cái và dấu cách
+      </p>
+    </div>
+
+    <label id="icon"><i class="fas fa-unlock-alt"></i></label>
+    <input type="password" formControlName="password" placeholder="Mật khẩu" />
+    <div
+      class="error-message"
+      *ngIf="
+        registerForm.get('password')?.touched &&
+        registerForm.get('password')?.invalid
+      "
+    >
+      <p *ngIf="registerForm.get('password')?.errors?.['required']">
+        Mật khẩu là bắt buộc
+      </p>
+      <p *ngIf="registerForm.get('password')?.errors?.['minlength']">
+        Mật khẩu phải có ít nhất 6 ký tự
+      </p>
+      <p *ngIf="registerForm.get('password')?.errors?.['maxlength']">
+        Mật khẩu không được vượt quá 16 ký tự
+      </p>
+      <p *ngIf="registerForm.get('password')?.errors?.['pattern']">
+        Mật khẩu phải có ít nhất 1 chữ cái viết hoa, 1 chữ cái viết thường, 1 số
+        và 1 ký tự đặc biệt
+      </p>
+    </div>
+
+    <label id="icon"><i class="fas fa-unlock-alt"></i></label>
+    <input
+      type="password"
+      formControlName="retypePassword"
+      placeholder="Nhập lại mật khẩu"
+    />
+    <div
+      class="error-message"
+      *ngIf="
+        registerForm.get('retypePassword')?.touched &&
+        registerForm.get('retypePassword')?.invalid
+      "
+    >
+      <p *ngIf="registerForm.get('retypePassword')?.errors?.['required']">
+        Vui lòng nhập lại mật khẩu
+      </p>
+    </div>
+    <div
+      class="error-message"
+      *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('retypePassword')?.touched"
+    >
+      <p>Mật khẩu nhập lại không khớp</p>
+    </div>
+
+    <label id="icon"><i class="fa-solid fa-location-dot"></i></label>
+    <input type="text" formControlName="address" placeholder="Địa chỉ" />
+
+    <label id="icon"><i class="fa-solid fa-cake-candles"></i></label>
+    <input type="date" formControlName="birthday" />
+
+    <hr />
     <div class="form-group">
       <h5>Bạn muốn đăng ký là</h5>
-      <select name="selectedRole" [(ngModel)]="selectedRole">
+      <select formControlName="selectedRole">
         <option *ngFor="let role of roles" [ngValue]="role">
           {{ role.name }}
         </option>
       </select>
     </div>
-    <hr>
+    <hr />
     <div class="btn-block">
-      <p>By clicking Register, you agree on our <a href="">Privacy Policy for W3Docs</a>.</p>
-      <button type="submit" (click)="register()">Đăng ký</button>
+      <p>
+        By clicking Register, you agree on our
+        <a href="">Privacy Policy for W3Docs</a>.
+      </p>
+      <button
+        type="submit"
+        (click)="register()"
+        [disabled]="!registerForm.valid"
+      >
+        Đăng ký
+      </button>
     </div>
   </form>
 </div>
