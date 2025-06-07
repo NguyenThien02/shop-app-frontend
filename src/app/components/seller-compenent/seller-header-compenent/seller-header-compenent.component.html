@@ -1,6 +1,6 @@
 <div class="flex items-center justify-between px-6 h-16">
   <div class="flex items-center justify-center h-16 border-b">
-    <h1 class="text-2xl font-['Pacifico'] text-primary">NPT</h1>
+    <h1 class="text-2xl font-['Pacifico'] text-primary" [routerLink]="['/']">NPT</h1>
   </div>
   <!-- Search bar -->
   <div class="flex-1 max-w-xl ml-6">
@@ -41,14 +41,13 @@
       </div>
     </div>
     <!-- User profile -->
-    <div class="relative">
-      <button id="userMenuButton" class="flex items-center space-x-2 focus:outline-none" (click)="toggleUserMenu()">
+    <div class="relative ">
+      <button id="userMenuButton" class="flex items-center space-x-3 focus:outline-none" (click)="toggleUserMenu()">
         <div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-sm">
-          <span>NT</span>
+          <span>{{userResponse?.full_name?.substring(0, 2)}}</span>
         </div>
-        <div class="hidden md:block text-left">
-          <p class="text-sm font-medium text-gray-700">{{userResponse?.full_name}}</p>
-          <p class="text-xs text-gray-500">{{userResponse?.role?.name}}</p>
+        <div class=" text-center">
+          <p class="text-sm font-medium text-gray-700 mb-0">{{userResponse?.full_name}}</p>
         </div>
         <div class="w-5 h-5 flex items-center justify-center text-gray-400">
           <i class="ri-arrow-down-s-line" *ngIf="!isUserMenuOpen"></i>

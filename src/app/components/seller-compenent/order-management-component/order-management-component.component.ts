@@ -98,9 +98,9 @@ export class OrderManagementComponentComponent implements OnInit {
     debugger
     this.orderService.updateOrderStatus(this.currentOrderId, this.orderStatus).subscribe({
       next: (response: any) => {
-        
-      }, 
-      complete(){
+
+      },
+      complete() {
         alert('Cập nhật thành công trạng thái order');
         window.location.reload();
       },
@@ -108,7 +108,28 @@ export class OrderManagementComponentComponent implements OnInit {
         alert(error.error);
       },
     })
+  }
 
+  // Phương thức để lấy các lớp Tailwind cho thẻ trạng thái
+  getStatusBadgeClasses(status: string): string {
+    switch (status) {
+      case 'PENDING':
+        return 'bg-orange-100 text-orange-800';
+      case 'PROCESSING':
+        return 'bg-blue-100 text-blue-800';
+      case 'SHIPPED': // Giả định bạn muốn màu tím cho SHIPPED
+        return 'bg-purple-100 text-purple-800';
+      case 'DELIVERED':
+        return 'bg-green-100 text-green-800';
+      case 'CANCELED': // Sử dụng CANCELED thay vì CANCELLED cho khớp với enum
+        return 'bg-red-100 text-red-800';
+      default:
+        return 'bg-gray-100 text-gray-800'; // Màu mặc định nếu trạng thái không xác định
+    }
+  }
+  getVietnameseStatus(statusValue: string): string {
+    const option = this.statusOptions.find(option => option.value === statusValue);
+    return option ? option.label : statusValue; // Trả về label nếu tìm thấy, ngược lại trả về nguyên trạng thái (phòng trường hợp không khớp)
   }
 
   changePage(page: number) {

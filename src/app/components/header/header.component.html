@@ -1,29 +1,53 @@
-
 <header class="header">
     <div class="container">
-        <div class="flex items-center justify-center h-16 border-b">
-            <h1 class="text-2xl font-['Pacifico'] text-primary">NPT</h1>
-        </div>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#">Trang chủ</a></li>
-                <li><a (click)="getCart()">Giỏ hàng</a></li>
-                <li><a (click)="getOrder()">Đơn hàng</a></li>
-            </ul>
-        </nav>
-        <ng-container *ngIf="user; else guestTemplate">
-            <div class="user-menu" (click)="toggleMenu()">
-                <span class="user-name">Xin chào, {{ user.full_name }}</span>
-                <div class="dropdown-menu" *ngIf="isMenuOpen">
-                    <a class="dropdown-item">Hồ sơ cá nhân</a>
-                    <a class="dropdown-item">Cài đặt</a>
-                    <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
-                </div>
+        <div class="header-main">
+            <div class="logo">
+                <h1 class="text-2xl font-['Pacifico'] text-primary">NPT</h1>
             </div>
-        </ng-container>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="nav-link">Trang chủ</a></li>
+                    <li><a (click)="getCart()" class="nav-link">Giỏ hàng</a></li>
+                    <li><a (click)="getOrder()" class="nav-link">Đơn hàng</a></li>
+                </ul>
+            </nav>
 
-        <ng-template #guestTemplate>
-            <a class="btn btn-primary" routerLink="/login">Đăng nhập</a>
-        </ng-template>
+            <div class="header-actions">
+                <ng-container *ngIf="user; else guestTemplate">
+                    <div class="user-menu" (click)="toggleMenu()">
+                        <div class="user-info">
+                            <span class="user-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </span>
+                            <span class="user-name">{{ user.full_name }}</span>
+                            <i class="fas fa-chevron-down menu-icon" [class.rotate]="isMenuOpen"></i>
+                        </div>
+                        <div class="dropdown-menu" [class.show]="isMenuOpen">
+                            <a class="dropdown-item"  (click)="PersonalProfile()">
+                                <i class="fas fa-user"></i>
+                                Hồ sơ cá nhân
+                            </a>
+                            <a class="dropdown-item">
+                                <i class="fas fa-cog"></i>
+                                Cài đặt
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" (click)="logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Đăng xuất
+                            </a>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-template #guestTemplate>
+                    <a class="btn btn-primary" routerLink="/login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Đăng nhập
+                    </a>
+                </ng-template>
+            </div>
+        </div>
     </div>
 </header>

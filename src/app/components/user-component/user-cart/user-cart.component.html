@@ -21,8 +21,14 @@
                 <td>{{ cartItem.quantity }}</td>
                 <td>{{ cartItem.quantity * cartItem.product.price | currency:'VND':'symbol':'1.0-0' }}</td>
                 <td class="action-buttons">
-                    <button class="add-button" (click)="addCartItems(cartItem.cart_item_id, cartItem.product.seller_respone.id)">Đặt hàng</button>
-                    <button class="delete-button" (click)="deleteCartItemById(cartItem.cart_item_id)">Xóa</button>
+                    <button class="btn btn-primary btn-sm me-2" (click)="addCartItems(cartItem.cart_item_id, cartItem.product.seller_respone.id)">
+                        <i class="fas fa-shopping-cart"></i>
+                        Đặt hàng
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteCartItemById(cartItem.cart_item_id)">
+                        <i class="fas fa-trash"></i>
+                        Xóa
+                    </button>
                 </td>
             </tr>
         </tbody>

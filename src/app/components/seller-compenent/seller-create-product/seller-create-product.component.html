@@ -5,38 +5,72 @@
     </div>
 
     <div class="form-section">
-        <h2 class="section-title">Thêm sản phẩm</h2>
-        <input type="file" (change)="onFileProduct($event)" />
-        <button type="submit" class="btn btn-primary" (click)="uploadFileProducts()">Nhập danh sách</button>
-        <hr class="divider">
-        <div class="form-group">
-            <h4>Tên sản phẩm:</h4>
-            <input type="text" name="productName" [(ngModel)]="productName" required>
+        <div class="form-header">
+            <h1 class="text-2xl font-semibold text-gray-800">Thêm sản phẩm</h1>
+            <div class="import-section">
+                <div class="file-upload">
+                    <input type="file" id="productFile" (change)="onFileProduct($event)" class="file-input" />
+                    <label for="productFile" class="file-label">
+                        <i class="fas fa-file-upload"></i> Chọn file
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-import" (click)="uploadFileProducts()">
+                    <i class="fas fa-upload"></i> Nhập danh sách
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-            <h4>Mô tả:</h4>
-            <input type="text" name="description" [(ngModel)]="description" required>
+
+        <div class="form-content">
+            <div class="form-group">
+                <label for="productName">Tên sản phẩm</label>
+                <input type="text" id="productName" name="productName" [(ngModel)]="productName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Mô tả</label>
+                <textarea id="description" name="description" [(ngModel)]="description" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="price">Giá</label>
+                    <div class="input-with-icon">
+                        <input type="number" id="price" name="price" [(ngModel)]="price" required>
+                        <span class="currency">VNĐ</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="stockQuantity">Số lượng trong kho</label>
+                    <input type="number" id="stockQuantity" name="stockQuantity" [(ngModel)]="stockQuantity" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="thumbnail">Ảnh đại diện</label>
+                <div class="file-upload">
+                    <input type="file" id="thumbnail" (change)="onFileSelected($event)" class="file-input" />
+                    <label for="thumbnail" class="file-label">
+                        <i class="fas fa-image"></i> Chọn ảnh
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Loại sản phẩm</label>
+                <select id="category" class="form-select" [(ngModel)]="selectedCategoryId">
+                    <option value="">Chọn loại sản phẩm</option>
+                    <option *ngFor="let category of categories" [value]="category.categoryId">
+                        {{ category.categoryName }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" (click)="createProduct()">
+                    <i class="fas fa-save"></i> Lưu sản phẩm
+                </button>
+            </div>
         </div>
-        <div class="form-group">
-            <h4>Giá:</h4>
-            <input type="number" name="price" [(ngModel)]="price" required>
-        </div>
-        <div class="form-group">
-            <h4>Tổng số sản phẩm trong kho:</h4>
-            <input type="number" name="stockQuantity" [(ngModel)]="stockQuantity" required>
-        </div>
-        <div class="form-group">
-            <h4>Ảnh đại diện:</h4>
-            <input type="file" (change)="onFileSelected($event)" />
-        </div>
-        <div class="form-group">
-            <h4>Loại sản phẩm:</h4>
-            <select class="form-control doctor-specialty" [(ngModel)]="selectedCategoryId">
-                <option *ngFor="let category of categories" [value]="category.categoryId">
-                    {{ category.categoryName }}
-                </option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="createProduct()">Lưu</button>
     </div>
 </div>

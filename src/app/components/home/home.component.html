@@ -1,71 +1,169 @@
 <app-header></app-header>
 
 <main class="main-content">
-    <section class="hero-section">
-        <div class="container">
-            <h1>Khám phá thế giới mua sắm của bạn</h1>
-            <p class="subtext">Hàng ngàn sản phẩm chất lượng, giá cả phải chăng, giao hàng nhanh chóng.</p>
-            <a href="#" class="btn btn-primary btn-large">Mua ngay</a>
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Discover Your Shopping World</h1>
+        <p class="hero-subtitle">
+          Thousands of quality products, affordable prices, fast delivery.
+        </p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary btn-large">
+            <i class="fas fa-shopping-bag"></i>
+            Mua ngay
+          </a>
+          <a href="#collections" class="btn btn-outline btn-large">
+            <i class="fas fa-arrow-down"></i>
+            See More
+          </a>
         </div>
-    </section>
-
-    <div class="collections">
-        <div class="container">
-            <h2>Sản phẩm nổi bật</h2>
-            <p class="description">
-                Khám phá bộ sưu tập sản phẩm chất lượng cao, thiết kế tinh tế, mang đến trải nghiệm tuyệt vời cho bạn!
-            </p>
-            <div class="carousel">
-                <div class="slides">
-                    <div class="slide" *ngFor="let item of featuredProductRespons; let i = index"
-                        [routerLink]="['/product-detail', item.product_response_id]">
-                        <img [src]="item.image_url" alt="Product Image">
-                        <h4>{{item.product_name}}</h4>
-                        <p>{{item.description}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
- 
-    <hr>
-    <section class="products-section">
-        <div class="container">
-            <h2>Sản phẩm mới nhất</h2>
-            <div class="search-box">
-                <select class="form-control service-category" [(ngModel)]="categoryId">
-                    <option [value]="0">Tất cả</option>
-                    <option *ngFor="let category of categories" [value]="category.categoryId">
-                        {{ category.categoryName }}
-                    </option>
-                </select>
-                <button class="btn btn-primary ml-2" (click)="searchProducts()">Tìm kiếm</button>
-            </div>
+  </section>
 
-            <div class="product-grid">
-                <div class="product-card" *ngFor="let product of productRespons">
-                    <img [src]="product.image_url" alt="Product Image" class="product-image">
-                    <h3 class="product-name">{{ product.product_name }}</h3>
-                    <p class="product-price">Giá: {{ product.price | currency:'VND':'symbol':'1.0-0' }}</p>
-                    <div class="actions">
-                        <button class="btn btn-primary" [routerLink]="['/product-detail', product.product_response_id]">
-                            <i class="bi bi-cart-plus"></i> Đặt hàng
-                        </button>
-                    </div>
+  <!-- Featured Products Section -->
+  <section id="collections" class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Sản phẩm nổi bật</h2>
+        <p class="section-description">
+          Khám phá bộ sưu tập sản phẩm chất lượng cao, thiết kế tinh tế, mang
+          đến trải nghiệm tuyệt vời cho bạn!
+        </p>
+      </div>
+
+      <div class="featured-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track" #carouselTrack>
+            <div
+              class="product-card"
+              *ngFor="let item of featuredProductRespons"
+              [routerLink]="['/product-detail', item.product_response_id]"
+            >
+              <div class="product-image">
+                <img [src]="item.image_url" [alt]="item.product_name" />
+              </div>
+              <div class="product-info">
+                <h3 class="product-name">{{ item.product_name }}</h3>
+                <p class="product-description">{{ item.description }}</p>
+                <div class="product-price">
+                  <span class="price">{{
+                    item.price | currency : "VND" : "symbol" : "1.0-0"
+                  }}</span>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
-
-    <div class="pagination">
-        <button (click)="changePage(page - 1)" [disabled]="page === 0">Trước</button>
-        <button *ngFor="let p of pages" (click)="changePage(p)" [class.active]="p === page">{{ p + 1 }}</button>
-        <button (click)="changePage(page + 1)" [disabled]="page === totalPages - 1">Tiếp</button>
+      </div>
     </div>
+  </section>
+
+  <!-- Latest Products Section -->
+  <section id="products" class="products-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title text-center">Sản phẩm mới nhất</h2>
+        <div class="search-box">
+          <div class="search-input">
+            <i class="fas fa-filter"></i>
+            <select class="form-control" [(ngModel)]="categoryId">
+              <option [value]="0">Tất cả danh mục</option>
+              <option
+                *ngFor="let category of categories"
+                [value]="category.categoryId"
+              >
+                {{ category.categoryName }}
+              </option>
+            </select>
+          </div>
+          <button class="btn btn-primary" (click)="searchProducts()">
+            <i class="fas fa-search"></i>
+            Tìm kiếm
+          </button>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <div
+          class="product-card"
+          *ngFor="let product of productRespons"
+          [routerLink]="['/product-detail', product.product_response_id]"
+        >
+          <div class="product-image">
+            <img [src]="product.image_url" [alt]="product.product_name" />
+          </div>
+          <div class="product-info">
+            <h3 class="product-name">{{ product.product_name }}</h3>
+            <div class="product-price">
+              <span class="price">{{
+                product.price | currency : "VND" : "symbol" : "1.0-0"
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button
+          class="pagination-btn"
+          (click)="changePage(page - 1)"
+          [disabled]="page === 0"
+        >
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="pagination-numbers">
+          <button
+            *ngFor="let p of pages"
+            (click)="changePage(p)"
+            [class.active]="p === page"
+            class="pagination-number"
+          >
+            {{ p + 1 }}
+          </button>
+        </div>
+        <button
+          class="pagination-btn"
+          (click)="changePage(page + 1)"
+          [disabled]="page === totalPages - 1"
+        >
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer class="footer">
-    <div class="container">
-        <p>&copy; 2025 ShopHub. All rights reserved.</p>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>NPT Shop</h3>
+        <p>Nơi mua sắm đáng tin cậy của bạn</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-section">
+          <h4>Liên kết</h4>
+          <ul>
+            <li><a href="#">Về chúng tôi</a></li>
+            <li><a href="#">Chính sách</a></li>
+            <li><a href="#">Điều khoản</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Hỗ trợ</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Bảo mật</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 NPT Shop. All rights reserved.</p>
+    </div>
+  </div>
 </footer>

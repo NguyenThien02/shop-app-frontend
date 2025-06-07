@@ -6,40 +6,44 @@ import { LocalStorageService } from 'src/app/services/LocalStorageService';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit{
-
+export class HeaderComponent implements OnInit {
   user?: UserResponse;
   isMenuOpen = false;
 
   constructor(
     private localStorageService: LocalStorageService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getUser();
   }
 
-  getUser(){
+  getUser() {
     this.user = this.localStorageService.getUserResponseFromLocalStorage();
   }
 
   navigateHome() {
-    debugger
-    if (this.localStorageService.getUserResponseFromLocalStorage().role.roleId == 1) {
-      this.router.navigate(['/user/home'])
+    debugger;
+    if (
+      this.localStorageService.getUserResponseFromLocalStorage().role.roleId ==
+      1
+    ) {
+      this.router.navigate(['/user/home']);
     }
-    if (this.localStorageService.getUserResponseFromLocalStorage().role.roleId == 2) {
-      this.router.navigate(['/seller/home'])
+    if (
+      this.localStorageService.getUserResponseFromLocalStorage().role.roleId ==
+      2
+    ) {
+      this.router.navigate(['/seller/home']);
     }
   }
 
   getCart() {
     const cartId = this.localStorageService.getCartFromLocalStorage();
     if (cartId) {
-
       this.router.navigate(['/user/cart', cartId]);
     } else {
       console.warn('No cart ID found in local storage.');
@@ -47,7 +51,7 @@ export class HeaderComponent implements OnInit{
   }
 
   getOrder() {
-    debugger
+    debugger;
     const user = this.localStorageService.getUserResponseFromLocalStorage();
     if (user) {
       const userId = user.id;
@@ -57,17 +61,26 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  toggleMenu(){
+  PersonalProfile() {
+    debugger;
+    if (this.user?.role.roleId == 1) {
+      this.router.navigate(['/']);
+    }
+    if (this.user?.role.roleId == 2) {
+      this.router.navigate(['/seller/home']);
+    }
+  }
+
+  toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
   logout() {
-  const confirmLogout = window.confirm("Bạn có chắc chắn muốn đăng xuất?");
-  if (confirmLogout) {
-    localStorage.clear();
-    window.location.reload();
-    this.router.navigate(['/']);
+    const confirmLogout = window.confirm('Bạn có chắc chắn muốn đăng xuất?');
+    if (confirmLogout) {
+      localStorage.clear();
+      window.location.reload();
+      this.router.navigate(['/']);
+    }
   }
-}
-
 }
