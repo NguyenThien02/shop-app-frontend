@@ -47,9 +47,9 @@ export class ProductService {
         return this.http.get(`${this.apiGetProductDetail}/${productId}`)
     }
 
-    uploadFileProducts(fileProduct : File){
+    uploadFileProducts(fileProduct : File, sellerId: number){
         const formData = new FormData();
         formData.append('fileProduct', fileProduct);
-        return this.http.post(this.apiUploadFileProducts, formData);
+        return this.http.post(`${this.apiUploadFileProducts}/${sellerId}`, formData);
     }
 }

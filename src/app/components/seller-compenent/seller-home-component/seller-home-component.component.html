@@ -1,567 +1,115 @@
 <app-seller-header-compenent></app-seller-header-compenent>
-<div class="app-layout-container flex h-screen">
-    <div class="sidebar-wrapper">
-        <app-seller-select-service></app-seller-select-service>
-    </div>
-
-    <main class="flex-1 overflow-y-auto custom-scrollbar p-6 bg-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <!-- Page title and actions -->
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-                <h1 class="text-2xl font-semibold text-gray-800">Quản lý đơn hàng</h1>
-                <div class="flex flex-wrap gap-3">
-                    <button
-                        class="bg-white border border-gray-200 text-gray-700 rounded-button px-4 py-2 text-sm font-medium hover:bg-gray-50 focus:outline-none flex items-center space-x-2 !rounded-button whitespace-nowrap">
-                        <div class="w-4 h-4 flex items-center justify-center">
-                            <i class="ri-download-line"></i>
-                        </div>
-                        <span>Xuất Excel</span>
-                    </button>
-                    <button
-                        class="bg-primary text-white rounded-button px-4 py-2 text-sm font-medium hover:bg-primary/90 focus:outline-none flex items-center space-x-2 !rounded-button whitespace-nowrap">
-                        <div class="w-4 h-4 flex items-center justify-center">
-                            <i class="ri-refresh-line"></i>
-                        </div>
-                        <span>Làm mới</span>
-                    </button>
+<div class="seller-home">
+    <app-seller-select-service></app-seller-select-service>
+    
+    <div class="seller-home__content">
+        <!-- Dashboard Cards -->
+        <div class="seller-home__dashboard">
+            <div class="seller-home__dashboard-cards">
+                <div class="seller-home__dashboard-card">
+                    <div class="seller-home__dashboard-card-title">Doanh thu hôm nay</div>
+                    <div class="seller-home__dashboard-card-value">12,500,000₫</div>
                 </div>
-            </div>
-
-            <!-- Filters section -->
-            <div class="bg-white rounded-lg shadow-sm p-5 mb-6 border border-gray-100">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <!-- Search by order ID or customer -->
-                    <div>
-                        <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Tìm kiếm</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                    <i class="ri-search-line"></i>
-                                </div>
-                            </div>
-                            <input type="text" id="search"
-                                class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-button text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                                placeholder="Mã đơn hàng, tên khách hàng...">
-                        </div>
-                    </div>
-
-                    <!-- Filter by status -->
-                    <div>
-                        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Trạng thái</label>
-                        <div class="relative">
-                            <button id="statusFilterBtn"
-                                class="flex items-center justify-between w-full px-3 py-2 text-sm border border-gray-200 rounded-button bg-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary !rounded-button whitespace-nowrap">
-                                <span id="statusFilterText">Tất cả trạng thái</span>
-                                <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                    <i class="ri-arrow-down-s-line"></i>
-                                </div>
-                            </button>
-                            <div id="statusFilterDropdown"
-                                class="hidden absolute z-10 mt-1 w-full bg-white shadow-lg rounded-lg border border-gray-100 py-1 max-h-60 overflow-auto custom-scrollbar">
-                                <div class="px-2 py-1.5 hover:bg-gray-50 cursor-pointer text-sm status-option"
-                                    data-value="all">Tất cả trạng thái</div>
-                                <div class="px-2 py-1.5 hover:bg-gray-50 cursor-pointer text-sm status-option"
-                                    data-value="pending">
-                                    <span class="status-dot status-pending"></span>Chờ xử lý
-                                </div>
-                                <div class="px-2 py-1.5 hover:bg-gray-50 cursor-pointer text-sm status-option"
-                                    data-value="processing">
-                                    <span class="status-dot status-processing"></span>Đang xử lý
-                                </div>
-                                <div class="px-2 py-1.5 hover:bg-gray-50 cursor-pointer text-sm status-option"
-                                    data-value="shipping">
-                                    <span class="status-dot status-shipping"></span>Đang giao
-                                </div>
-                                <div class="px-2 py-1.5 hover:bg-gray-50 cursor-pointer text-sm status-option"
-                                    data-value="delivered">
-                                    <span class="status-dot status-delivered"></span>Đã giao
-                                </div>
-                                <div class="px-2 py-1.5 hover:bg-gray-50 cursor-pointer text-sm status-option"
-                                    data-value="cancelled">
-                                    <span class="status-dot status-cancelled"></span>Đã hủy
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Start date -->
-                    <div>
-                        <label for="startDate" class="block text-sm font-medium text-gray-700 mb-1">Từ ngày</label>
-                        <div class="relative">
-                            <input type="date" id="startDate"
-                                class="block w-full px-3 py-2 border border-gray-200 rounded-button text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                    <i class="ri-calendar-line"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- End date -->
-                    <div>
-                        <label for="endDate" class="block text-sm font-medium text-gray-700 mb-1">Đến ngày</label>
-                        <div class="relative">
-                            <input type="date" id="endDate"
-                                class="block w-full px-3 py-2 border border-gray-200 rounded-button text-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                    <i class="ri-calendar-line"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="seller-home__dashboard-card">
+                    <div class="seller-home__dashboard-card-title">Đơn hàng mới</div>
+                    <div class="seller-home__dashboard-card-value">35</div>
                 </div>
-
-                <div class="flex justify-end mt-4">
-                    <button id="resetFilters"
-                        class="bg-white border border-gray-200 text-gray-700 rounded-button px-4 py-2 text-sm font-medium hover:bg-gray-50 focus:outline-none mr-3 !rounded-button whitespace-nowrap">Đặt
-                        lại</button>
-                    <button id="applyFilters"
-                        class="bg-primary text-white rounded-button px-4 py-2 text-sm font-medium hover:bg-primary/90 focus:outline-none !rounded-button whitespace-nowrap">Áp
-                        dụng</button>
+                <div class="seller-home__dashboard-card">
+                    <div class="seller-home__dashboard-card-title">Sản phẩm đang bán</div>
+                    <div class="seller-home__dashboard-card-value">128</div>
                 </div>
-            </div>
-
-            <!-- Order list -->
-            <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
-                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                    <h2 class="font-medium text-gray-700">Danh sách đơn hàng</h2>
-                    <div class="flex items-center">
-                        <span class="text-sm text-gray-500 mr-2">Hiển thị:</span>
-                        <div class="relative">
-                            <button id="pageSizeBtn"
-                                class="flex items-center space-x-1 bg-white border border-gray-200 rounded-button px-3 py-1.5 text-sm focus:outline-none !rounded-button whitespace-nowrap">
-                                <span id="pageSizeText">10</span>
-                                <div class="w-4 h-4 flex items-center justify-center text-gray-400">
-                                    <i class="ri-arrow-down-s-line"></i>
-                                </div>
-                            </button>
-                            <div id="pageSizeDropdown"
-                                class="hidden absolute z-10 mt-1 bg-white shadow-lg rounded-lg border border-gray-100 py-1 w-20">
-                                <div class="px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm pagesize-option"
-                                    data-value="10">10</div>
-                                <div class="px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm pagesize-option"
-                                    data-value="20">20</div>
-                                <div class="px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm pagesize-option"
-                                    data-value="50">50</div>
-                                <div class="px-3 py-1.5 hover:bg-gray-50 cursor-pointer text-sm pagesize-option"
-                                    data-value="100">100</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Mã đơn</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Khách hàng</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Ngày đặt</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Tổng tiền</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Trạng thái</th>
-                                <th scope="col"
-                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2506</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Trần Minh Tuấn</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">05/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.250.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        <span class="status-dot status-delivered"></span>Đã giao
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2506">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2506">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2505</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nguyễn Thị Hương</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">05/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">850.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                                        <span class="status-dot status-shipping"></span>Đang giao
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2505">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2505">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2504</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lê Văn Đức</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.150.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                        <span class="status-dot status-processing"></span>Đang xử lý
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2504">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2504">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2503</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Phạm Thị Mai</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">04/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">750.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        <span class="status-dot status-delivered"></span>Đã giao
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2503">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2503">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2502</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Vũ Hoàng Nam</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">03/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.850.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                        <span class="status-dot status-cancelled"></span>Đã hủy
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2502">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2502">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2501</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Đỗ Thị Thanh Hà</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">03/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">3.450.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-amber-100 text-amber-800">
-                                        <span class="status-dot status-pending"></span>Chờ xử lý
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2501">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2501">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2500</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Nguyễn Văn Hoàng</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">02/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.150.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        <span class="status-dot status-delivered"></span>Đã giao
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2500">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2500">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2499</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Trần Thị Minh Ngọc</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">02/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2.750.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
-                                        <span class="status-dot status-shipping"></span>Đang giao
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2499">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2499">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2498</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Phan Văn Quang</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">01/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">950.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                        <span class="status-dot status-processing"></span>Đang xử lý
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2498">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2498">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#ORD-2497</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Lê Thị Hồng Nhung</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">01/06/2025</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1.650.000đ</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        class="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                        <span class="status-dot status-cancelled"></span>Đã hủy
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex justify-end space-x-2">
-                                        <button
-                                            class="view-order-btn p-1.5 text-blue-600 hover:bg-blue-50 rounded !rounded-button"
-                                            data-order-id="ORD-2497">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-eye-line"></i>
-                                            </div>
-                                        </button>
-                                        <button
-                                            class="update-status-btn p-1.5 text-purple-600 hover:bg-purple-50 rounded !rounded-button"
-                                            data-order-id="ORD-2497">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-edit-line"></i>
-                                            </div>
-                                        </button>
-                                        <button class="p-1.5 text-gray-500 hover:bg-gray-50 rounded !rounded-button">
-                                            <div class="w-4 h-4 flex items-center justify-center">
-                                                <i class="ri-more-2-fill"></i>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pagination -->
-                <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-between">
-                    <div class="text-sm text-gray-500">
-                        Hiển thị 1-10 của 56 đơn hàng
-                    </div>
-                    <div class="flex space-x-1">
-                        <button
-                            class="px-3 py-1.5 text-sm text-gray-500 bg-white border border-gray-200 rounded-button hover:bg-gray-50 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed !rounded-button whitespace-nowrap"
-                            disabled="">
-                            <div class="w-4 h-4 flex items-center justify-center">
-                                <i class="ri-arrow-left-s-line"></i>
-                            </div>
-                        </button>
-                        <button
-                            class="px-3 py-1.5 text-sm text-white bg-primary border border-primary rounded-button hover:bg-primary/90 focus:outline-none !rounded-button whitespace-nowrap">1</button>
-                        <button
-                            class="px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-button hover:bg-gray-50 focus:outline-none !rounded-button whitespace-nowrap">2</button>
-                        <button
-                            class="px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-button hover:bg-gray-50 focus:outline-none !rounded-button whitespace-nowrap">3</button>
-                        <button
-                            class="px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-button hover:bg-gray-50 focus:outline-none !rounded-button whitespace-nowrap">4</button>
-                        <button
-                            class="px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-button hover:bg-gray-50 focus:outline-none !rounded-button whitespace-nowrap">5</button>
-                        <button
-                            class="px-3 py-1.5 text-sm text-gray-700 bg-white border border-gray-200 rounded-button hover:bg-gray-50 focus:outline-none !rounded-button whitespace-nowrap">
-                            <div class="w-4 h-4 flex items-center justify-center">
-                                <i class="ri-arrow-right-s-line"></i>
-                            </div>
-                        </button>
-                    </div>
+                <div class="seller-home__dashboard-card">
+                    <div class="seller-home__dashboard-card-title">Đánh giá khách hàng</div>
+                    <div class="seller-home__dashboard-card-value">4.8/5 ⭐</div>
                 </div>
             </div>
         </div>
-    </main>
+
+        <!-- Main Content -->
+        <div class="seller-home__main-content">
+            <!-- Chart Section -->
+            <div class="seller-home__chart">
+                <h3>Biểu đồ doanh thu</h3>
+                <img src="https://dummyimage.com/400x200/ddd/aaa&text=Chart+Placeholder" alt="Revenue Chart">
+            </div>
+
+            <!-- Orders Section -->
+            <div class="seller-home__orders">
+                <h3>Đơn hàng mới nhất</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mã ĐH</th>
+                            <th>Khách hàng</th>
+                            <th>Giá trị</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#1001</td>
+                            <td>Nguyễn Văn A</td>
+                            <td>1,200,000₫</td>
+                            <td><span class="status status--active">Đã xác nhận</span></td>
+                        </tr>
+                        <tr>
+                            <td>#1002</td>
+                            <td>Trần Thị B</td>
+                            <td>850,000₫</td>
+                            <td><span class="status status--inactive">Chờ xử lý</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="seller-home__products">
+            <div class="seller-home__products-header">
+                <h2>Quản lý sản phẩm</h2>
+                <div class="seller-home__products-filters">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                    <select>
+                        <option>Tất cả trạng thái</option>
+                        <option>Đang bán</option>
+                        <option>Hết hàng</option>
+                    </select>
+                    <button>+ Thêm sản phẩm mới</button>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>SKU</th>
+                        <th>Giá bán</th>
+                        <th>Tồn kho</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="https://dummyimage.com/36x36/ccc/fff&text=SP" class="product-image" alt="Product">
+                            Áo thun nam
+                        </td>
+                        <td>TS001</td>
+                        <td>250,000₫</td>
+                        <td>120</td>
+                        <td><span class="status status--active">Đang bán</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="https://dummyimage.com/36x36/ccc/fff&text=SP" class="product-image" alt="Product">
+                            Quần jean nữ
+                        </td>
+                        <td>JN002</td>
+                        <td>350,000₫</td>
+                        <td>50</td>
+                        <td><span class="status status--inactive">Hết hàng</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

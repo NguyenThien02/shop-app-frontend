@@ -77,6 +77,7 @@ export class UserOrderComponent implements OnInit {
         next: (response: any) => {
           debugger
           this.orderId = response.order_id;
+          alert("Đặt hàng thành công, đang xử lý")
           this.createOrderDetail();
         }, error(err) {
           alert(err);
@@ -103,7 +104,5 @@ export class UserOrderComponent implements OnInit {
         },
       })
     });
-    alert(`${this.message}`);
-    this.router.navigate(['user/order-by-user-id/', this.userResponse?.id]);
   }
 }

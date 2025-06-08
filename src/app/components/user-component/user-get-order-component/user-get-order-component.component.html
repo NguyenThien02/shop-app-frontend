@@ -8,7 +8,6 @@
                 <th>Tổng tiền</th>
                 <th>Địa chỉ giao hàng</th>
                 <th>Trạng thái đơn hàng</th>
-                <th>Trạng thái thanh toán</th>
                 <th>Ghi chú</th>
             </tr>
         </thead>
@@ -17,8 +16,11 @@
                 <td>{{order.order_date | date:'dd/MM/yyyy' }}</td>
                 <td>{{order.total_amount | currency:'VND':'symbol':'1.0-0' }}</td>
                 <td>{{order.shipping_address}}</td>
-                <td>{{order.order_status}}</td>
-                <td>{{order.payment_status}}</td>
+                <td>
+                    <span [ngClass]="getStatusClass(order.order_status)">
+                        {{getStatusLabel(order.order_status)}}
+                    </span>
+                </td>
                 <td>{{order.notes}}</td>
             </tr>
         </tbody>

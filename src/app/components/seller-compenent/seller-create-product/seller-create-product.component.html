@@ -13,6 +13,7 @@
                     <label for="productFile" class="file-label">
                         <i class="fas fa-file-upload"></i> Chọn file
                     </label>
+                    <span *ngIf="fileProducts" class="file-name">{{ fileProducts.name }}</span>
                 </div>
                 <button type="submit" class="btn btn-import" (click)="uploadFileProducts()">
                     <i class="fas fa-upload"></i> Nhập danh sách
@@ -53,6 +54,7 @@
                     <label for="thumbnail" class="file-label">
                         <i class="fas fa-image"></i> Chọn ảnh
                     </label>
+                    <span *ngIf="selectedFileImage" class="file-name">{{ selectedFileImage.name }}</span>
                 </div>
             </div>
 

@@ -8,10 +8,9 @@ import { ProductService } from 'src/app/services/ProductService';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  
   productRespons: ProductResponse[] = [];
   featuredProductRespons: ProductResponse[] = [];
 
@@ -20,7 +19,7 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   pages: number[] = [];
   categoryId: number = 0;
-  categories : Category[] = [];
+  categories: Category[] = [];
 
   pageFeatured: number = 0;
   limitFeatured: number = 10;
@@ -31,8 +30,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private categoryService : CategoryService
-  ) { }
+    private categoryService: CategoryService
+  ) {}
 
   ngOnInit() {
     this.getProductByCategory(this.page, this.limit, this.categoryId);
@@ -40,56 +39,61 @@ export class HomeComponent implements OnInit {
     this.getAllCategories();
   }
 
-  getAllCategories(){
+  getAllCategories() {
     this.categoryService.getAllCategories().subscribe({
-      next : (response : any) => {
+      next: (response: any) => {
         this.categories = response;
-      },error(err) {
-          console.error(err);
       },
-    })
+      error: (error: any) => {
+        alert(error.error)
+      }
+    });
   }
 
   getProductByCategory(page: number, limit: number, categoryId: number) {
-    this.productService.getProductByCategory(page, limit, categoryId).subscribe({
-      next: (response: any) => {
-        response.productResponse.forEach((productResponse: ProductResponse) => {
-          productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
-        });
-        this.totalPages = response.totalPages;
-        this.productRespons = response.productResponse;
-        this.pages = Array(this.totalPages).fill(0).map((x, i) => i);
-      },
-      error: (error: any) => {
-        console.error('Error:', error);
-      }
-    })
+    this.productService
+      .getProductByCategory(page, limit, categoryId)
+      .subscribe({
+        next: (response: any) => {
+          response.productResponse.forEach(
+            (productResponse: ProductResponse) => {
+              productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
+            }
+          );
+          this.totalPages = response.totalPages;
+          this.productRespons = response.productResponse;
+          this.pages = Array(this.totalPages)
+            .fill(0)
+            .map((x, i) => i);
+        },
+        error: (error: any) => {
+          console.error('Error:', error);
+        },
+      });
   }
 
   getFeaturedProduct(pageFeatured: number, limitFeatured: number) {
-    debugger
-    this.productService.getFeaturedProduct(pageFeatured, limitFeatured, 0).subscribe({
-      next: (response: any) => {
-        debugger
-        response.productResponse.forEach((productResponse: ProductResponse) => {
-          productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
-        });
-        this.featuredProductRespons = response.productResponse;
-      },
-      error: (error: any) => {
-        console.error('Error:', error);
-      }
-    })
+    debugger;
+    this.productService
+      .getFeaturedProduct(pageFeatured, limitFeatured, 0)
+      .subscribe({
+        next: (response: any) => {
+          debugger;
+          response.productResponse.forEach(
+            (productResponse: ProductResponse) => {
+              productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
+            }
+          );
+          this.featuredProductRespons = response.productResponse;
+        },
+        error: (error: any) => {
+          console.error('Error:', error);
+        },
+      });
   }
 
-  searchProducts(){
+  searchProducts() {
     this.getProductByCategory(0, this.limit, this.categoryId);
-  }
-
-  openProductDetail(product: any) {
-    debugger
-    this.selectedProduct = product;
-    this.isModalOpen = true;
   }
 
   changePage(page: number) {

@@ -60,22 +60,43 @@ li {
     flex: 1 1 0%;
 }
 
-// Các styles cho chấm trạng thái
-.status-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
-    vertical-align: middle;
+/* Status badge styles */
+.status-pending,
+.status-processing,
+.status-shipping,
+.status-delivered,
+.status-cancelled {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-block;
 }
 
-.status-pending { background-color: orange; }
-.status-processing { background-color: blue; }
-.status-shipping { background-color: purple; }
-.status-delivered { background-color: green; }
-.status-cancelled { background-color: red; }
+.status-pending {
+  background-color: #fff3cd;
+  color: #ff8c00; /* Orange */
+}
 
+.status-processing {
+  background-color: #e6f3ff;
+  color: #0000ff; /* Blue */
+}
+
+.status-shipping {
+  background-color: #f3e6ff;
+  color: #800080; /* Purple */
+}
+
+.status-delivered {
+  background-color: #e6ffe6;
+  color: #008000; /* Green */
+}
+
+.status-cancelled {
+  background-color: #ffe6e6;
+  color: #ff0000; /* Red */
+}
 
 // phân trang 
 .pagination {

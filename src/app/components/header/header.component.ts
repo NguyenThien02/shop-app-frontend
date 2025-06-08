@@ -79,7 +79,6 @@ export class HeaderComponent implements OnInit {
     const confirmLogout = window.confirm('Bạn có chắc chắn muốn đăng xuất?');
     if (confirmLogout) {
       localStorage.clear();
-      window.location.reload();
       this.router.navigate(['/']);
     }
   }

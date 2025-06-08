@@ -16,6 +16,14 @@ export class UserGetOrderComponentComponent implements OnInit {
   pages: number[] = [];
   totalPages: number = 0
 
+  statusOptions = [
+    { value: 'PENDING', label: 'Chờ xử lý', class: 'status-pending' },
+    { value: 'PROCESSING', label: 'Đang xử lý', class: 'status-processing' },
+    { value: 'SHIPPED', label: 'Đang giao', class: 'status-shipping' },
+    { value: 'DELIVERED', label: 'Đã giao', class: 'status-delivered' },
+    { value: 'CANCELED', label: 'Đã hủy', class: 'status-cancelled' }
+  ];
+
   constructor(
     private orderService: OrderService,
     private localStorageService: LocalStorageService
@@ -49,5 +57,15 @@ export class UserGetOrderComponentComponent implements OnInit {
   changePage(page: number){
     this.getOrderByUserId(page);
     this.page = page;
+  }
+
+  getStatusLabel(status: string): string {
+    const statusOption = this.statusOptions.find(option => option.value === status);
+    return statusOption ? statusOption.label : status;
+  }
+
+  getStatusClass(status: string): string {
+    const statusOption = this.statusOptions.find(option => option.value === status);
+    return statusOption ? statusOption.class : '';
   }
 }

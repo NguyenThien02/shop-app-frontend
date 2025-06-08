@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CartDTO } from 'src/app/dtos/CartDTO';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItemsDTO } from 'src/app/dtos/CartItemsDTO';
 import { environment } from 'src/app/environment/environment';
 import { ProductResponse } from 'src/app/responses/ProductResponse';
@@ -27,7 +26,8 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private localStorageService: LocalStorageService,
     private cartService: CartService,
-    private cartItemService : CartItemService
+    private cartItemService : CartItemService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -64,6 +64,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCartItem() {
+    if(!this.userId){
+      this.router.navigate(['/login']);
+      return;
+    }
     debugger
     this.cartId = this.localStorageService.getCartFromLocalStorage();
     if (this.cartId) {
@@ -75,7 +79,7 @@ export class ProductDetailComponent implements OnInit {
       this.cartItemService.createCartItem(cartItemsDTO).subscribe ({
         next : (response : any) => {
           debugger
-          alert("cart created successfully");
+          alert("Thêm sản phẩm vào giỏ hàng thành công");
         }, error(err) {
             console.error(err);
         },
@@ -85,6 +89,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   buyNow() {
-
+    if(!this.userId){
+      this.router.navigate(['/login']);
+      return;
+    }
   }
 }

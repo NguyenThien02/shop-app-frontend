@@ -54,11 +54,11 @@ export class RegisterComponentComponent implements OnInit {
         ],
         retypePassword: ['', [Validators.required]],
         address: ['', Validators.required],
-        birthday: ['', Validators.required],
+        birthday: [null, Validators.required],
         selectedRole: [null, Validators.required],
       },
       {
-        validators: this.passwordMatchValidator,
+        validators: [this.passwordMatchValidator, this.checkAge],
       }
     );
   }
@@ -71,6 +71,26 @@ export class RegisterComponentComponent implements OnInit {
       return null;
     }
     return { passwordMismatch: true };
+  }
+
+  checkAge(form: FormGroup) {
+    const today = new Date();
+    const birthdayValue = form.get('birthday')?.value;
+    if (birthdayValue) {
+      const birthday = new Date(birthdayValue);
+      let age = today.getFullYear() - birthday.getFullYear();
+      const monthDiff = today.getMonth() - birthday.getMonth();
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDay() < birthday.getDate())
+      ) {
+        age--;
+      }
+      if (age < 18) {
+        return { underage: true };
+      }
+    }
+    return null;
   }
 
   ngOnInit() {
@@ -99,8 +119,11 @@ export class RegisterComponentComponent implements OnInit {
         address: this.registerForm.value.address,
         role_id: this.registerForm.value.selectedRole?.roleId ?? 1,
       };
+      debugger;
       this.userService.register(registerDTO).subscribe({
         next: (response: any) => {
+          debugger;
+          alert('Đăng ký thành công');
           this.router.navigate(['/login']);
         },
         error: (error: any) => {

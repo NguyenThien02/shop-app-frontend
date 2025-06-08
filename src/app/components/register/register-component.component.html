@@ -102,6 +102,12 @@
 
     <label id="icon"><i class="fa-solid fa-cake-candles"></i></label>
     <input type="date" formControlName="birthday" />
+    <div
+      class="error-message"
+      *ngIf="registerForm.errors?.['underage'] && registerForm.get('birthday')?.touched"
+    >
+      <p>Bạn chưa đủ 18 tuổi</p>
+    </div>
 
     <hr />
     <div class="form-group">
@@ -115,13 +121,14 @@
     <hr />
     <div class="btn-block">
       <p>
-        By clicking Register, you agree on our
-        <a href="">Privacy Policy for W3Docs</a>.
+        Bằng cách nhấp vào Đăng ký, bạn đồng ý với chúng tôi
+        <a href="">Chính sách bảo mật cho NPT</a>.
       </p>
       <button
         type="submit"
         (click)="register()"
         [disabled]="!registerForm.valid"
+        class="btn-submit"
       >
         Đăng ký
       </button>
