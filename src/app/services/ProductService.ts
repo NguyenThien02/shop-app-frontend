@@ -44,12 +44,17 @@ export class ProductService {
 
     getProductDetail(productId : number){
         debugger
-        return this.http.get(`${this.apiGetProductDetail}/${productId}`)
+        return this.http.get(`${this.apiGetProductDetail}/by-product-id/${productId}`)
     }
 
     uploadFileProducts(fileProduct : File, sellerId: number){
         const formData = new FormData();
         formData.append('fileProduct', fileProduct);
         return this.http.post(`${this.apiUploadFileProducts}/${sellerId}`, formData);
+    }
+
+    getProductBySellerId(sellerId : number){
+        debugger
+        return this.http.get(`${this.apiGetProductDetail}/by-seller-id/${sellerId}`)
     }
 }
