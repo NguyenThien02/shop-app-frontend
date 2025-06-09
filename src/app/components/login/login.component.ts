@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginDTO } from 'src/app/dtos/LoginDTO';
 import { CartService } from 'src/app/services/CartService';
 import { LocalStorageService } from 'src/app/services/LocalStorageService';
+import { CookieService } from 'src/app/services/CookieService';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -18,6 +19,7 @@ export class LoginComponent {
     private userService: UserService,
     private router: Router,
     private localStorageService: LocalStorageService,
+    private cookieService: CookieService,
     private cartService: CartService
   ) {}
 
@@ -26,15 +28,15 @@ export class LoginComponent {
       phone_number: this.phoneNumber,
       password: this.password,
     };
-    debugger;
     localStorage.clear();
+    this.cookieService.clearToken();
     this.userService.login(loginDTO).subscribe({
       next: (response: any) => {
         debugger;
         const token = response.token;
 
         if (token) {
-          this.localStorageService.setToken(token);
+          this.cookieService.setToken(token);
           this.localStorageService.setUserResponseToLocalStorage(
             response.user_response
           );

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserResponse } from 'src/app/responses/UserResponse';
 import { LocalStorageService } from 'src/app/services/LocalStorageService';
+import { CookieService } from 'src/app/services/CookieService';
 import { UserService } from 'src/app/services/UserService';
 
 @Component({
@@ -16,6 +17,7 @@ export class SellerHeaderCompenentComponent implements OnInit {
   constructor(
     private userService: UserService,
     private localStorageService: LocalStorageService,
+    private cookieService: CookieService,
     private router: Router
   ) { }
 
@@ -37,6 +39,7 @@ export class SellerHeaderCompenentComponent implements OnInit {
     debugger
     if (confirmLogout) {
       localStorage.clear();
+      this.cookieService.clearToken();
       this.router.navigate(['/']);
     }
   }

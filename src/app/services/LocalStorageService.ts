@@ -8,7 +8,6 @@ import { UserResponse } from '../responses/UserResponse';
 })
 export class LocalStorageService {
     // readonly: Ngăn không cho gán lại giá trị sau khi khởi tạo
-    private readonly TOKEN_KEY = 'access_token';
     private readonly USER_RESPONSE = 'user_response';
     private readonly CART = 'cart';
     private readonly CARTITEMS = 'cart_items';
@@ -19,16 +18,6 @@ export class LocalStorageService {
 
     constructor(@Inject(DOCUMENT) private document: Document) {
         this.localStorage = document.defaultView?.localStorage;
-    }
-
-    setToken(token: string): void {
-        if (this.localStorage) {
-            this.localStorage.setItem(this.TOKEN_KEY, token);
-        }
-    }
-
-    getToken(): string {
-        return this.localStorage?.getItem(this.TOKEN_KEY) ?? '';
     }
 
     setUserResponseToLocalStorage(userResponse: UserResponse) {

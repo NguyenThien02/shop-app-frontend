@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserResponse } from 'src/app/responses/UserResponse';
 import { LocalStorageService } from 'src/app/services/LocalStorageService';
+import { CookieService } from 'src/app/services/CookieService';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private localStorageService: LocalStorageService,
+    private cookieService: CookieService,
     private router: Router
   ) {}
 
@@ -79,6 +81,7 @@ export class HeaderComponent implements OnInit {
     const confirmLogout = window.confirm('Bạn có chắc chắn muốn đăng xuất?');
     if (confirmLogout) {
       localStorage.clear();
+      this.cookieService.clearToken();
       this.router.navigate(['/']);
     }
   }
