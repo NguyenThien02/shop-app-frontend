@@ -30,7 +30,7 @@ export class RegisterComponentComponent implements OnInit {
             Validators.required,
             Validators.pattern('^0[0-9]{9}$'),
             Validators.minLength(10),
-            Validators.maxLength(11),
+            Validators.maxLength(10),
           ],
         ],
         fullName: [
@@ -55,7 +55,6 @@ export class RegisterComponentComponent implements OnInit {
         retypePassword: ['', [Validators.required]],
         address: ['', Validators.required],
         birthday: [null, Validators.required],
-        selectedRole: [null, Validators.required],
       },
       {
         validators: [this.passwordMatchValidator, this.checkAge],

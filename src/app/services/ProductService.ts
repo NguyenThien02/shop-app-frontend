@@ -16,11 +16,12 @@ export class ProductService {
     
     constructor(private http: HttpClient){ }
 
-    getProductByCategory(page : number, limit : number, categoryId : number){
+    getProductByCategory(page : number, limit : number, categoryId : number, keyWord : string){
         const params = new HttpParams()
             .set('page', page.toString())
             .set('limit', limit.toString())
-            .set('category_id', categoryId.toString());
+            .set('category_id', categoryId.toString())
+            .set('key_word', keyWord.toString());
 
         return this.http.get(this.apiGetProductByCategory,{params});
     }

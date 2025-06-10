@@ -79,8 +79,8 @@ export class UserOrderComponent implements OnInit {
           this.orderId = response.order_id;
           alert("Đặt hàng thành công, đang xử lý")
           this.createOrderDetail();
-        }, error(err) {
-          alert(err);
+        }, error(error: any) {
+          alert(error.error);
         },
       })
     }

@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   pages: number[] = [];
   categoryId: number = 0;
+  keyWord: string = "";
   categories: Category[] = [];
 
   pageFeatured: number = 0;
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getProductByCategory(this.page, this.limit, this.categoryId);
+    this.getProductByCategory(this.page, this.limit, this.categoryId, this.keyWord);
     this.getFeaturedProduct(this.pageFeatured, this.limitFeatured);
     this.getAllCategories();
   }
@@ -50,9 +51,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getProductByCategory(page: number, limit: number, categoryId: number) {
+  getProductByCategory(page: number, limit: number, categoryId: number, keyWord: string) {
     this.productService
-      .getProductByCategory(page, limit, categoryId)
+      .getProductByCategory(page, limit, categoryId, this.keyWord)
       .subscribe({
         next: (response: any) => {
           response.productResponse.forEach(
@@ -93,13 +94,13 @@ export class HomeComponent implements OnInit {
   }
 
   searchProducts() {
-    this.getProductByCategory(0, this.limit, this.categoryId);
+    this.getProductByCategory(0, this.limit, this.categoryId, this.keyWord);
   }
 
   changePage(page: number) {
     if (page >= 0 && page < this.totalPages) {
       this.page = page;
-      this.getProductByCategory(this.page, this.limit, this.categoryId);
+      this.getProductByCategory(this.page, this.limit, this.categoryId, this.keyWord);
     }
   }
 }

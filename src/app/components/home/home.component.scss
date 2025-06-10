@@ -279,7 +279,7 @@ img {
     .search-box {
         display: flex;
         gap: $spacing-md;
-        max-width: 600px;
+        max-width: 800px;
         margin: $spacing-lg auto;
 
         .search-input {
@@ -294,7 +294,7 @@ img {
                 color: $secondary-color;
             }
 
-            select {
+            input, select {
                 width: 100%;
                 padding: $spacing-sm $spacing-md $spacing-sm $spacing-xl;
                 border: 1px solid $border-color;
@@ -307,7 +307,11 @@ img {
                 &:focus {
                     outline: none;
                     border-color: $primary-color;
-  }
+                }
+            }
+
+            input {
+                cursor: text;
             }
         }
 
@@ -316,6 +320,7 @@ img {
             display: inline-flex;
             align-items: center;
             gap: $spacing-sm;
+            white-space: nowrap;
         }
     }
 }

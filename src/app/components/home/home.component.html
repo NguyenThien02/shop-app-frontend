@@ -67,6 +67,15 @@
         <h2 class="section-title text-center">Sản phẩm mới nhất</h2>
         <div class="search-box">
           <div class="search-input">
+            <i class="fas fa-search"></i>
+            <input 
+              type="text" 
+              class="form-control" 
+              [(ngModel)]="keyWord" 
+              placeholder="Tìm kiếm sản phẩm..."
+            >
+          </div>
+          <div class="search-input">
             <i class="fas fa-filter"></i>
             <select class="form-control" [(ngModel)]="categoryId">
               <option [value]="0">Tất cả danh mục</option>
