@@ -29,13 +29,13 @@
           <span>Quản lý đơn hàng</span>
         </a>
       </li>
-      <li>
-        <a href="#"
+      <li [class.active]="isActive('voucher-management')">
+        <a routerLink="/seller/voucher-management"
           class="sidebar-link flex items-center px-4 py-3 text-gray-700 rounded-button hover:bg-gray-50 transition-colors">
           <div class="w-5 h-5 flex items-center justify-center mr-3">
-            <i class="ri-user-3-line"></i>
+            <i class="ri-coupon-3-line"></i>
           </div>
-          <span>Quản lý khách hàng</span>
+          <span>Quản lý voucher</span>
         </a>
       </li>
       <li>

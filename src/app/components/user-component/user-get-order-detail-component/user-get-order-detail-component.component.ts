@@ -4,6 +4,7 @@ import { environment } from 'src/app/environment/environment';
 import { OrderDetailResponse } from 'src/app/responses/OrderDetailResponse';
 import { OrderResponse } from 'src/app/responses/OrderResponse';
 import { ProductResponse } from 'src/app/responses/ProductResponse';
+import { UserResponse } from 'src/app/responses/UserResponse';
 import { OrderDetailService } from 'src/app/services/OrderDetailService';
 import { OrderService } from 'src/app/services/OrderService';
 
@@ -21,6 +22,7 @@ export class UserGetOrderDetailComponentComponent implements OnInit {
   limit: number = 10;
   pages: number[] = [];
   totalPages: number = 0;
+  seller?: UserResponse
 
   constructor(
     private route: ActivatedRoute,
@@ -53,6 +55,9 @@ export class UserGetOrderDetailComponentComponent implements OnInit {
         this.orderDetails = response.orderDetailList;
         this.totalPages = response.totalPages;
         this.pages = Array(this.totalPages).fill(0).map((x, i) => i);
+      }, 
+      complete: () => {
+        this.seller = this.orderDetails[0].productResponse.seller_respone
       }, error(err) {
         alert(err);
       },

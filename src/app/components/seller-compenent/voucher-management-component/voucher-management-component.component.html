@@ -1,0 +1,150 @@
+<app-seller-header-compenent></app-seller-header-compenent>
+<div class="seller-voucher">
+    <app-seller-select-service></app-seller-select-service>
+
+    <div class="voucher-management">
+        <div class="container">
+            <h2 class="section-title">Quản lý Voucher</h2>
+            
+            <form (ngSubmit)="createVoucher()" #voucherForm="ngForm" class="voucher-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="type">Loại Voucher</label>
+                        <select 
+                            id="type" 
+                            name="type" 
+                            [(ngModel)]="voucherDTO.type" 
+                            required 
+                            class="form-control">
+                            <option value="">Chọn loại voucher</option>
+                            <option [value]="voucherTypes.PERCENTAGE">Giảm theo phần trăm</option>
+                            <option [value]="voucherTypes.FIXED">Giảm theo số tiền cố định</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Giá trị giảm {{voucherDTO.type === voucherTypes.PERCENTAGE ? '(%)' : '(VND)'}}</label>
+                        <input 
+                            type="number" 
+                            id="amount" 
+                            name="amount" 
+                            [(ngModel)]="voucherDTO.amount" 
+                            required 
+                            min="0"
+                            class="form-control"
+                            [placeholder]="voucherDTO.type === voucherTypes.PERCENTAGE ? 'Nhập phần trăm giảm' : 'Nhập số tiền giảm'">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Mô tả</label>
+                    <textarea 
+                        id="description" 
+                        name="description" 
+                        [(ngModel)]="voucherDTO.description" 
+                        required 
+                        class="form-control"
+                        placeholder="Nhập mô tả voucher"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="minOrderCost">Đơn hàng tối thiểu (VND)</label>
+                    <input 
+                        type="number" 
+                        id="minOrderCost" 
+                        name="minOrderCost" 
+                        [(ngModel)]="voucherDTO.minOrderCost" 
+                        min="0"
+                        class="form-control"
+                        placeholder="Nhập giá trị đơn hàng tối thiểu">
+                </div>
+
+                <div class="form-group">
+                    <label for="expiryDatetime">Ngày hết hạn</label>
+                    <input 
+                        type="date" 
+                        id="expiryDatetime" 
+                        name="expiryDatetime" 
+                        [(ngModel)]="voucherDTO.expiryDatetime" 
+                        required 
+                        class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="limitUsage">Giới hạn số lượng</label>
+                    <input 
+                        type="number" 
+                        id="limitUsage" 
+                        name="limitUsage" 
+                        [(ngModel)]="voucherDTO.limitUsage" 
+                        min="1"
+                        class="form-control"
+                        placeholder="Nhập số lần sử dụng tối đa">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" [disabled]="!voucherForm.form.valid">
+                        Tạo Voucher
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Voucher List Section -->
+        <div class="container mt-4">
+            <div class="voucher-list">
+                <h3 class="section-title">Danh sách Voucher</h3>
+                
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Loại</th>
+                                <th>Giá trị</th>
+                                <th>Mô tả</th>
+                                <th>Đơn hàng tối thiểu</th>
+                                <th>Ngày hết hạn</th>
+                                <th>Số lượng</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let voucher of vouchers">
+                                <td>{{voucher.voucherId}}</td>
+                                <td>{{voucher.type === 'PERCENTAGE' ? 'Giảm theo %' : 'Giảm theo tiền'}}</td>
+                                <td>
+                                    {{voucher.type === 'PERCENTAGE' ? voucher.amount + '%' : voucher.amount | currency:'VND'}}
+                                </td>
+                                <td>{{voucher.description}}</td>
+                                <td>{{voucher.minOrderCost | currency:'VND'}}</td>
+                                <td>{{voucher.expiryDatetime | date : 'dd/MM/yyyy'}}</td>
+                                <td>{{voucher.limitUsage}}</td>
+                                <td>
+                                    <span [class]="'status-badge ' + (isVoucherActive(voucher) ? 'active' : 'expired')">
+                                        {{isVoucherActive(voucher) ? 'Còn hạn' : 'Hết hạn'}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr *ngIf="vouchers.length === 0">
+                                <td colspan="9" class="text-center">Không có voucher nào</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

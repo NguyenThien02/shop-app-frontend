@@ -9,6 +9,7 @@
     </div>
     <div class="product-list">
       <h2>Sản phẩm</h2>
+      <h3>Nguời bán: {{seller?.full_name}}</h3>
       <div class="product-item" *ngFor="let orderDetail of orderDetails">
         <img id="productImage" [src]="orderDetail.productResponse.image_url" alt="Product Image">
         <div class="product-details">

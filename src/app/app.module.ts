@@ -22,6 +22,7 @@ import { UserGetOrderComponentComponent } from './components/user-component/user
 import { UserGetOrderDetailComponentComponent } from './components/user-component/user-get-order-detail-component/user-get-order-detail-component.component';
 import { SellerSelectServiceComponent } from './components/seller-compenent/seller-select-service/seller-select-service.component';
 import { OrderManagementComponentComponent } from './components/seller-compenent/order-management-component/order-management-component.component';
+import { VoucherManagementComponentComponent } from './components/seller-compenent/voucher-management-component/voucher-management-component.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { OrderManagementComponentComponent } from './components/seller-compenent
     UserGetOrderDetailComponentComponent,
     SellerSelectServiceComponent,
     OrderManagementComponentComponent,
+    VoucherManagementComponentComponent,
   ],
   imports: [
     BrowserModule,

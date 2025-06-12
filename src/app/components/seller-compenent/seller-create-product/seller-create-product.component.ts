@@ -60,11 +60,9 @@ export class SellerCreateProductComponent implements OnInit {
   getAllProductBySeller() {
     this.productService.getProductBySellerId(this.sellerId).subscribe({
       next: (response: any) => {
-        response.productResponse.forEach(
-          (productResponse: ProductResponse) => {
-            productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
-          }
-        );
+        response.productResponse.forEach((productResponse: ProductResponse) => {
+          productResponse.image_url = `${environment.apiBaseUrl}/products/image-product/${productResponse.image_url}`;
+        });
         this.products = response.productResponse;
         this.totalPages = response.totalPages;
         this.pages = Array(this.totalPages)
@@ -77,8 +75,9 @@ export class SellerCreateProductComponent implements OnInit {
     });
   }
 
-  getUserResponse(){
-    this.sellerId = this.localStorageService.getUserResponseFromLocalStorage().id;
+  getUserResponse() {
+    this.sellerId =
+      this.localStorageService.getUserResponseFromLocalStorage().id;
   }
 
   onFileSelected(event: any) {
@@ -101,6 +100,9 @@ export class SellerCreateProductComponent implements OnInit {
           next: (response: any) => {
             alert('Tạo sản phẩm mới thành công');
           },
+          complete() {
+            window.location.reload();
+          },
           error: (error: any) => {
             alert(error.error);
           },
@@ -113,14 +115,18 @@ export class SellerCreateProductComponent implements OnInit {
   }
   uploadFileProducts() {
     if (this.fileProducts) {
-      this.productService.uploadFileProducts(this.fileProducts, this.sellerId).subscribe({
-        next: (response: any) => {
-          alert(response.message);
-        },
-        error: (error: any) => {
-          alert(error.error);
-        },
-      });
+      this.productService
+        .uploadFileProducts(this.fileProducts, this.sellerId)
+        .subscribe({
+          next: (response: any) => {
+            alert(response.message);
+          },complete() {
+            window.location.reload();
+          },
+          error: (error: any) => {
+            alert(error.error);
+          },
+        });
     }
   }
 }

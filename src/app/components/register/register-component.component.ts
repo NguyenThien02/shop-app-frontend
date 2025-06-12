@@ -55,6 +55,7 @@ export class RegisterComponentComponent implements OnInit {
         retypePassword: ['', [Validators.required]],
         address: ['', Validators.required],
         birthday: [null, Validators.required],
+        selectedRole: [null],
       },
       {
         validators: [this.passwordMatchValidator, this.checkAge],
@@ -99,6 +100,7 @@ export class RegisterComponentComponent implements OnInit {
   getRole() {
     this.roleService.getRoles().subscribe({
       next: (roles: Role[]) => {
+        debugger
         this.roles = roles;
       },
       error: (error: any) => {

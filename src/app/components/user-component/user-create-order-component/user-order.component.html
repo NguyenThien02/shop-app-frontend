@@ -11,10 +11,20 @@
             <label for="shipping_addres">Địa chỉ giao hàng</label>
             <textarea id="shipping_addres" [(ngModel)]="shippingAddres" name="shipping_addres" required></textarea>
         </div>
-
         <div class="form-group">
-            <label for="total_amount">Tổng tiền (VNĐ): {{totalAmount | currency:'VND':'symbol':'1.0-0'}}</label>
-            <h3></h3>
+            <label for="voucher">Chọn mã giảm giá</label>
+            <select id="voucher" [(ngModel)]="selectedVoucher" name="voucher" class="form-control" (ngModelChange)="onVoucherChange()">
+                <option [ngValue]="null">Không sử dụng mã giảm giá</option>
+                <option *ngFor="let voucher of vouchers" [ngValue]="voucher">
+                    Giảm {{voucher.type === 'PERCENTAGE' ? voucher.amount + '%' : (voucher.amount | currency:'VND':'symbol':'1.0-0')}} - 
+                    Đơn tối thiểu: {{voucher.minOrderCost | currency:'VND':'symbol':'1.0-0'}} - 
+                    Hạn sử dụng: {{voucher.expiryDatetime | date:'dd/MM/yyyy'}} - 
+                    Số lượng: {{voucher.limitUsage}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="total_amount">Tổng tiền: {{totalAmount | currency:'VND':'symbol':'1.0-0'}} VND</label>
         </div>
 
         <div class="form-group">
@@ -26,6 +36,7 @@
     <hr>
     <div class="form-section">
         <h2 class="section-title">Danh sách sản phẩm đã chọn</h2>
+        <h3>Nguời bán: {{seller?.full_name}}</h3>
         <table class="pricing-table">
             <thead>
                 <tr>

@@ -1,9 +1,9 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, IsOptional } from "class-validator";
 
 export class OrderDetailDTO {
     @IsNumber()
-    @IsNotEmpty()
-    orderId: number;
+    @IsOptional()
+    orderId?: number;
 
     @IsString()
     @IsNotEmpty()
@@ -13,14 +13,9 @@ export class OrderDetailDTO {
     @IsNotEmpty()
     numberOfProducts: number;
 
-    @IsString()
-    @IsNotEmpty()
-    totalMoney: number;
-
     constructor(data : any){
         this.orderId = data.orderId;
         this.productId = data.productId;
         this.numberOfProducts = data.numberOfProducts;
-        this.totalMoney = data.totalMoney;
     }
 }
